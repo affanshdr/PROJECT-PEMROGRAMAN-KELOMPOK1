@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 void Header(){
      printf("\nSelamat Datang Di program\n");
@@ -29,11 +30,30 @@ typedef struct
 } Buku;
 
 
-int main(int argc, char* argv[]){
+int main(){
 
     Clear_System();
     Header();
-    printf("Update");
+    int Pilihan;
+    int Login;
+    
+
+   while (1) {
+    Clear_System();
+    printf(" --- ( Menu / Option ) --- \n");
+    printf("\n1. Melihat Buku Yang Tersedia\n");
+    printf("2. Meminjam Buku \n");
+    printf("3. Mengembalikan Buku\n");
+    printf("4. Logout\n");
+    printf("\nPilihan Anda ( 1 - 4 ): ");
+    scanf("%d", &Pilihan);
+
+    if (Pilihan < 1 || Pilihan > 4) {
+        printf("Mohon Masukkan Opsi yang benar\n");
+    } else {
+        break;
+    }
+    }
 
     return 0;
 
