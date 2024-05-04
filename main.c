@@ -71,6 +71,7 @@ int main(){
         printf("1. Admin \n2. User\n");
         printf("Pilihan Anda (1 / 2) : ");
         scanf("%d", &Login);
+        while (getchar() != '\n');
         switch (Login){
             case 1:
                 
@@ -79,7 +80,7 @@ int main(){
                 printf("|       Login Admin      |\n");
                 printf("+------------------------+\n");
                 Identitas Identitas_User = Login_Pengguna(); // Username && Password
-                printf("\nSelamat Datang %s\n", Identitas_User.Username);
+                printf("\nSelamat Datang %s", Identitas_User.Username);
                 printf("\nPass :  %s\n", Identitas_User.Password);
             
                 Selesai = 1;
@@ -98,11 +99,12 @@ int main(){
                 break;
 
             default :
-                printf("Mohon masukkan input dengan benar !!!\n");
+                printf("Mohon masukkan input dengan benar !!\n");
                 continue;
         
         }
 
     }
+    return 0;
 }
 
