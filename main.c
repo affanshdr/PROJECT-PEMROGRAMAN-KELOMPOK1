@@ -17,6 +17,12 @@ void Clear_System() {
     #endif
 }
 
+void Login_Pengguna(){
+    char Username[100];
+    char Password[100];
+    
+}
+
 typedef struct 
 {  
     unsigned int Id_Buku;
@@ -39,7 +45,7 @@ int main(){
     int Selesai = 0;
     
     while(!Selesai){
-        
+
         printf("\nAnda Login Sebagai ?\n");
         printf("1. Admin \n2. User\n");
         printf("Pilihan Anda (1/2) : ");
