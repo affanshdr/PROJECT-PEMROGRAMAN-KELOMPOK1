@@ -58,22 +58,34 @@ int main(){
         scanf("%d", &Login);
         switch (Login){
             case 1:
-                //Berhasil buat disini nanti
+                
                 Clear_System();
                 printf("+------------------------+\n");
                 printf("|       Login Admin      |\n");
                 printf("+------------------------+\n");
                 Login_Pengguna();
+
+                //Work on it 
+
+
+
                 Selesai = 1;
                 break;
                 printf("%d" , Selesai);
             case 2 :
-                //Berhasil buat disini nanti
+                
                 Clear_System();
                 printf("+------------------------+\n");
                 printf("|       Login User       |\n");
                 printf("+------------------------+\n");
                 Login_Pengguna();
+
+
+                //Work on it
+
+
+
+
                 Selesai = 1;
                 break;
             case 3:
