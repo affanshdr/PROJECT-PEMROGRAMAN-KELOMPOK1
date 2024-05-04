@@ -4,9 +4,14 @@
 #include <ctype.h>
 
 void Header(){
-     printf("\nSelamat Datang Di program\n");
-    printf("Database Perpustakaan\n");
-    printf("===========================\n");
+    printf("\n");
+    printf("+------------------------------------+\n");
+    printf("|      Selamat Datang Di Program     |\n");
+    printf("|        Database Perpustakaan       |\n");
+    printf("+------------------------------------+\n");
+    //printf("\nSelamat Datang Di program\n");
+    //printf("Database Perpustakaan\n");
+    //printf("===========================\n");
 }
 
 void Clear_System() {
@@ -20,7 +25,11 @@ void Clear_System() {
 void Login_Pengguna(){
     char Username[100];
     char Password[100];
-    
+    printf(" Username User: ");
+    scanf("%s", Username);
+    printf(" Password User: ");
+    scanf("%s", Password);
+
 }
 
 typedef struct 
@@ -53,11 +62,21 @@ int main(){
         switch (Login){
             case 1:
                 //Berhasil buat disini nanti
+                Clear_System();
+                printf("+------------------------+\n");
+                printf("|       Login Admin      |\n");
+                printf("+------------------------+\n");
+                Login_Pengguna();
                 Selesai = 1;
                 break;
                 printf("%d" , Selesai);
             case 2 :
                 //Berhasil buat disini nanti
+                Clear_System();
+                printf("+------------------------+\n");
+                printf("|       Login User       |\n");
+                printf("+------------------------+\n");
+                Login_Pengguna();
                 Selesai = 1;
                 break;
             default :
