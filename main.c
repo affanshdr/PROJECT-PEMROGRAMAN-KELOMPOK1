@@ -6,7 +6,7 @@
 void Header(){
      printf("\nSelamat Datang Di program\n");
     printf("Database Perpustakaan\n");
-    printf("===========================\n\n");
+    printf("===========================\n");
 }
 
 void Clear_System() {
@@ -36,14 +36,36 @@ int main(){
     Header();
     int Pilihan;
     int Login;
+    int Selesai = 0;
     
-    printf("Anda Login Sebagai ?\n");
-    printf("1. Admin \n2. User");
-    printf("Pilihan Anda (1/2) ? :");
-    scanf("%d", Login);
+    while(!Selesai){
+        
+        printf("\nAnda Login Sebagai ?\n");
+        printf("1. Admin \n2. User\n");
+        printf("Pilihan Anda (1/2) : ");
+        scanf("%d", &Login);
+        switch (Login){
+            case 1:
+                //Berhasil buat disini nanti
+                Selesai = 1;
+                break;
+                printf("%d" , Selesai);
+            case 2 :
+                //Berhasil buat disini nanti
+                Selesai = 1;
+                break;
+            default :
+                printf("Mohon masukkan input dengan benar !!!\n");
+                continue;
+        
+        }
 
+    }
+}
+
+    //Clear_System();
+    /*
    while (1) {
-    Clear_System();
     printf(" --- ( Menu / Option ) --- \n");
     printf("\n1. Melihat Buku Yang Tersedia\n");
     printf("2. Meminjam Buku \n");
@@ -53,6 +75,7 @@ int main(){
     scanf("%d", &Pilihan);
 
     if (Pilihan < 1 || Pilihan > 4) {
+        //Clear_System();
         printf("Mohon Masukkan Opsi yang benar\n");
     } else {
         break;
@@ -61,4 +84,6 @@ int main(){
 
     return 0;
 
-}
+
+
+*/
