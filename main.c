@@ -9,9 +9,6 @@ void Header(){
     printf("|      Selamat Datang Di Program     |\n");
     printf("|        Database Perpustakaan       |\n");
     printf("+------------------------------------+\n");
-    //printf("\nSelamat Datang Di program\n");
-    //printf("Database Perpustakaan\n");
-    //printf("===========================\n");
 }
 
 void Clear_System() {
@@ -56,8 +53,8 @@ int main(){
     while(!Selesai){
 
         printf("\nAnda Login Sebagai ?\n");
-        printf("1. Admin \n2. User\n");
-        printf("Pilihan Anda (1/2) : ");
+        printf("1. Admin \n2. User\n3. Kembali\n");
+        printf("Pilihan Anda (1 - 3) : ");
         scanf("%d", &Login);
         switch (Login){
             case 1:
@@ -79,6 +76,9 @@ int main(){
                 Login_Pengguna();
                 Selesai = 1;
                 break;
+            case 3:
+                continue;
+
             default :
                 printf("Mohon masukkan input dengan benar !!!\n");
                 continue;
