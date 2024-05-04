@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+// Manajemen sistem =========================================
 void Header(){
     printf("\n");
     printf("+------------------------------------+\n");
@@ -18,16 +19,26 @@ void Clear_System() {
         system("clear");
     #endif
 }
+// ===========================================================
 
-void Login_Pengguna(){
+
+// Manajemen Pengguna ========================================
+typedef struct {
     char Username[100];
     char Password[100];
-    printf(" Username User: ");
-    scanf("%s", Username);
-    printf(" Password User: ");
-    scanf("%s", Password);
+} Identitas;
 
+Identitas Login_Pengguna(){
+    Identitas Identitas_Fix;
+    printf(" Username User: ");
+    scanf("%s", Identitas_Fix.Username);
+    printf(" Password User: ");
+    scanf("%s", Identitas_Fix.Password);
+    return Identitas_Fix;
 }
+// ===========================================================
+
+// Manajemen Data Perpus =====================================
 
 typedef struct 
 {  
@@ -41,6 +52,7 @@ typedef struct
 
 } Buku;
 
+//=============================================================
 
 int main(){
 
@@ -53,8 +65,8 @@ int main(){
     while(!Selesai){
 
         printf("\nAnda Login Sebagai ?\n");
-        printf("1. Admin \n2. User\n3. Kembali\n");
-        printf("Pilihan Anda (1 - 3) : ");
+        printf("1. Admin \n2. User\n");
+        printf("Pilihan Anda (1 / 2) : ");
         scanf("%d", &Login);
         switch (Login){
             case 1:
@@ -63,33 +75,25 @@ int main(){
                 printf("+------------------------+\n");
                 printf("|       Login Admin      |\n");
                 printf("+------------------------+\n");
-                Login_Pengguna();
-
+                //Identitas Identitas_User = Login_Pengguna(); // Username && Password
+                //printf("\nSelamat Datang %s\n", Identitas_User.Username);
+                //printf("\nPass :  %s\n", Identitas_User.Password);
                 //Work on it 
-
-
-
                 Selesai = 1;
                 break;
                 printf("%d" , Selesai);
+
             case 2 :
                 
                 Clear_System();
                 printf("+------------------------+\n");
                 printf("|       Login User       |\n");
                 printf("+------------------------+\n");
-                Login_Pengguna();
-
+                //Login_Pengguna(); // Username && Password
 
                 //Work on it
-
-
-
-
                 Selesai = 1;
                 break;
-            case 3:
-                continue;
 
             default :
                 printf("Mohon masukkan input dengan benar !!!\n");
@@ -100,27 +104,3 @@ int main(){
     }
 }
 
-    //Clear_System();
-    /*
-   while (1) {
-    printf(" --- ( Menu / Option ) --- \n");
-    printf("\n1. Melihat Buku Yang Tersedia\n");
-    printf("2. Meminjam Buku \n");
-    printf("3. Mengembalikan Buku\n");
-    printf("4. Logout\n");
-    printf("\nPilihan Anda ( 1 - 4 ): ");
-    scanf("%d", &Pilihan);
-
-    if (Pilihan < 1 || Pilihan > 4) {
-        //Clear_System();
-        printf("Mohon Masukkan Opsi yang benar\n");
-    } else {
-        break;
-    }
-    }
-
-    return 0;
-
-
-
-*/
