@@ -37,6 +37,10 @@ int main(){
     int Pilihan;
     int Login;
     
+    printf("Anda Login Sebagai ?\n");
+    printf("1. Admin \n2. User");
+    printf("Pilihan Anda (1/2) ? :");
+    scanf("%d", Login);
 
    while (1) {
     Clear_System();
