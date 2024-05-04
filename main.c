@@ -33,7 +33,7 @@ int main(int argc, char* argv[]){
 
     Clear_System();
     Header();
-
+    printf("Update");
 
     return 0;
 
