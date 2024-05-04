@@ -31,9 +31,12 @@ typedef struct {
 Identitas Login_Pengguna(){
     Identitas Identitas_Fix;
     printf(" Username User: ");
-    scanf("%s", Identitas_Fix.Username);
+    fgets(Identitas_Fix.Username, sizeof(Identitas_Fix.Username), stdin);
+    
+    //int c;
+    //while ((c = getchar()) != '\n' && c != EOF);
     printf(" Password User: ");
-    scanf("%s", Identitas_Fix.Password);
+    fgets(Identitas_Fix.Password, sizeof(Identitas_Fix.Password), stdin);
     return Identitas_Fix;
 }
 // ===========================================================
@@ -75,13 +78,12 @@ int main(){
                 printf("+------------------------+\n");
                 printf("|       Login Admin      |\n");
                 printf("+------------------------+\n");
-                //Identitas Identitas_User = Login_Pengguna(); // Username && Password
-                //printf("\nSelamat Datang %s\n", Identitas_User.Username);
-                //printf("\nPass :  %s\n", Identitas_User.Password);
-                //Work on it 
+                Identitas Identitas_User = Login_Pengguna(); // Username && Password
+                printf("\nSelamat Datang %s\n", Identitas_User.Username);
+                printf("\nPass :  %s\n", Identitas_User.Password);
+            
                 Selesai = 1;
                 break;
-                printf("%d" , Selesai);
 
             case 2 :
                 
