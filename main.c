@@ -6,10 +6,10 @@
 // Manajemen sistem =========================================
 void Header(){
     printf("\n");
-    printf("+------------------------------------+\n");
-    printf("|      Selamat Datang Di Program     |\n");
-    printf("|        Database Perpustakaan       |\n");
-    printf("+------------------------------------+\n");
+    printf(" +------------------------------------+\n");
+    printf(" |      Selamat Datang Di Program     |\n");
+    printf(" |        Database Perpustakaan       |\n");
+    printf(" +------------------------------------+\n");
 }
 
 void Clear_System() {
@@ -81,7 +81,7 @@ void Delete(){
 
 void Update(){
 
-    
+
 
 
 }
@@ -99,7 +99,7 @@ typedef struct {
 
 Identitas Login_Pengguna(){
     Identitas Identitas_Fix;
-    printf(" Username User: ");
+    printf("\n Username User: ");
     fgets(Identitas_Fix.Username, sizeof(Identitas_Fix.Username), stdin);
     
     printf(" Password User: ");
@@ -123,9 +123,9 @@ int main(){
     
     while(!Selesai){
 
-        printf("\nAnda Login Sebagai ?\n");
-        printf("1. Admin \n2. User\n");
-        printf("Pilihan Anda (1 / 2) : ");
+        printf("\n   Anda Login Sebagai ?\n");
+        printf("\n   1. Admin \n   2. User\n");
+        printf("\n   Pilihan Anda (1 / 2) : ");
         scanf("%d", &Pil);
         while (getchar() != '\n');
         switch (Pil){
@@ -133,9 +133,9 @@ int main(){
                 
         
                 Clear_System();
-                printf("+------------------------+\n");
-                printf("|       Login Admin      |\n");
-                printf("+------------------------+\n");
+                printf(" +-------------------------------+\n");
+                printf(" |          Login Admin          |\n");
+                printf(" +-------------------------------+\n");
                 Identitas Identitas_User = Login_Pengguna(); // Username && Password
                 printf("\nSelamat Datang %s", Identitas_User.Username);
                 //printf("\nPass :  %s\n", Identitas_User.Password);
