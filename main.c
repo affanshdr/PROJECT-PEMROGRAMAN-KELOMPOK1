@@ -41,7 +41,7 @@ typedef struct
     Clear_System();
     Perpus Buku;
     FILE* fp;
-    fp = fopen("Data_Buku.txt", "a"); // Gunakan "a" untuk menambahkan data ke file yang sudah ada
+    fp = fopen("Data_Buku.txt", "a"); 
     printf("============================\n");
     printf("      Input Data Buku       \n");
     printf("============================\n");
@@ -50,10 +50,10 @@ typedef struct
     }
     else {
         printf("\n Id Buku         (int)   : "); 
-        scanf("%u", &Buku.Id_Buku); // Menggunakan %u untuk unsigned int
-        getchar(); // Membersihkan buffer
+        scanf("%u", &Buku.Id_Buku); 
+        getchar(); 
         printf("\n Judul Buku      (char)  : "); 
-        fgets(Buku.Judul, sizeof(Buku.Judul), stdin); // Menggunakan fgets untuk membaca string
+        fgets(Buku.Judul, sizeof(Buku.Judul), stdin); 
         printf("\n Penulis         (char)  : "); 
         fgets(Buku.Penulis, sizeof(Buku.Penulis), stdin);
         printf("\n Penerbit        (char)  : "); 
@@ -65,10 +65,10 @@ typedef struct
         printf("\n Jumlah Tersedia (int)   : "); 
         scanf("%u", &Buku.Jumlah_Tersedia);
         
-        // Menulis data ke file dalam format teks
+        
         fprintf(fp, "%u|%s|%s|%s|%u|%u|%u\n", Buku.Id_Buku, Buku.Judul, Buku.Penulis, Buku.Penerbit, Buku.Jumlah_Halaman, Buku.Tahun_Terbit, Buku.Jumlah_Tersedia);
         
-        fclose(fp); // Tutup file setelah selesai menulis
+        fclose(fp); 
     }
 }
     
