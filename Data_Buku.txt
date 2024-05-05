@@ -1,1 +1,10 @@
+Id Buku : 1976079872
+judul Buku : Win
 
+Penulis : Me
+
+Penerbit : Yap
+
+Jumlah Halaman : 23
+Tahun Terbit : 20004
+Jumlah Tersedia : 12

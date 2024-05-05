@@ -40,6 +40,7 @@ typedef struct
     void Create(){
     Clear_System();
     Perpus Buku;
+    unsigned int Id;
     FILE* fp;
     fp = fopen("Data_Buku.txt", "a"); 
     printf("============================\n");
@@ -50,7 +51,7 @@ typedef struct
     }
     else {
         printf("\n Id Buku         (int)   : "); 
-        scanf("%u", &Buku.Id_Buku); 
+        scanf("%u", &Id); 
         getchar(); 
         printf("\n Judul Buku      (char)  : "); 
         fgets(Buku.Judul, sizeof(Buku.Judul), stdin); 
@@ -66,12 +67,25 @@ typedef struct
         scanf("%u", &Buku.Jumlah_Tersedia);
         
         
-        fprintf(fp, "%u|%s|%s|%s|%u|%u|%u\n", Buku.Id_Buku, Buku.Judul, Buku.Penulis, Buku.Penerbit, Buku.Jumlah_Halaman, Buku.Tahun_Terbit, Buku.Jumlah_Tersedia);
+        fprintf(fp, "Id Buku : %u\njudul Buku : %s\nPenulis : %s\nPenerbit : %s\nJumlah Halaman : %u\nTahun Terbit : %u\nJumlah Tersedia : %u\n", 
+                Buku.Id_Buku, Buku.Judul, Buku.Penulis, Buku.Penerbit, Buku.Jumlah_Halaman, 
+                Buku.Tahun_Terbit, Buku.Jumlah_Tersedia);
         
         fclose(fp); 
     }
 }
+
+void Delete(){
+
+}
+
+void Update(){
+
     
+
+
+}
+
 // ===========================================================
 
 
@@ -99,8 +113,7 @@ Identitas Login_Pengguna(){
 int main(){
 
     // Variabel
-    int Pil, pil1 , pil2 ;
-    int Login;
+    int Pil, Pil1 , Pil2 ;
     int Selesai = 0;
     int Selesai2;
 
@@ -113,12 +126,12 @@ int main(){
         printf("\nAnda Login Sebagai ?\n");
         printf("1. Admin \n2. User\n");
         printf("Pilihan Anda (1 / 2) : ");
-        scanf("%d", &Login);
+        scanf("%d", &Pil);
         while (getchar() != '\n');
-        switch (Login){
+        switch (Pil){
             case 1:
                 
-                while(!Selesai2){
+        
                 Clear_System();
                 printf("+------------------------+\n");
                 printf("|       Login Admin      |\n");
@@ -130,12 +143,12 @@ int main(){
                 printf("2. Hapus Buku\n");
                 printf("3. Edit Buku\n");
                 printf("Masukan Opsi: ");
-                scanf("%d", &Pil);
+                scanf("%d", &Pil1);
 
-                switch (Pil)
+                switch (Pil1)
                 {
                 case 1:
-                    printf("Berhasil 1.");
+                    Create();
                     break;
                 
                 case 2:
@@ -152,7 +165,7 @@ int main(){
 
                 Selesai = 1;
                 break;
-                }
+                
             case 2 :
                 
                 Clear_System();
