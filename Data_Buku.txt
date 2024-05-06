@@ -1,0 +1,2 @@
+12, "manusia a", "halo halo", "halo press", 234, 2002, 4
+102, "nasi goreng", "ikan m", "ikan press", 200, 1999, 3
