@@ -173,13 +173,15 @@ int main(){
                 printf("|       Login User       |\n");
                 printf("+------------------------+\n");
                 //Login_Pengguna(); // Username && Password
-
+                Identitas Identitas_User = Login_Pengguna(); // Username && Password
+                printf("\nSelamat Datang %s", Identitas_User.Username);
                 printf("1. Lihat Buku\n");
                 printf("2. Pinjam Buku\n");
                 printf("3. List Buku yang Dipinjam\n");
                 printf("4. Balikkan Buku\n");
                 printf("\nOpsi Anda: ");
                 scanf("%d", &Pil2);
+                
 
                 switch (Pil2)
                 {
