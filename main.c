@@ -144,7 +144,7 @@ int main(){
                 printf("3. Edit Buku\n");
                 printf("Masukan Opsi: ");
                 scanf("%d", &Pil1);
-
+                
                 switch (Pil1)
                 {
                 case 1:
@@ -172,9 +172,7 @@ int main(){
                 printf("+------------------------+\n");
                 printf("|       Login User       |\n");
                 printf("+------------------------+\n");
-                //Login_Pengguna(); // Username && Password
-                Identitas Identitas_User = Login_Pengguna(); // Username && Password
-                printf("\nSelamat Datang %s", Identitas_User.Username);
+               
                 printf("1. Lihat Buku\n");
                 printf("2. Pinjam Buku\n");
                 printf("3. List Buku yang Dipinjam\n");
