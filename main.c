@@ -174,6 +174,30 @@ int main(){
                 printf("+------------------------+\n");
                 //Login_Pengguna(); // Username && Password
 
+                printf("1. Lihat Buku\n");
+                printf("2. Pinjam Buku\n");
+                printf("3. List Buku yang Dipinjam\n");
+                printf("4. Balikkan Buku\n");
+                printf("\nOpsi Anda: ");
+                scanf("%d", &Pil2);
+
+                switch (Pil2)
+                {
+                case 1:
+                    printf("1. Berhasil");
+                    break;
+                
+                case 2:
+                    printf("Berhasil 2.");
+                    break;
+                
+                case 3:
+                    printf("Berhasil 3.");
+                    break;
+                default:
+                    printf("Mohon Masukkan opsi dengan benar");
+                    continue;
+                }
                 //Work on it
                 Selesai = 1;
                 break;
