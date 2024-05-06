@@ -8,3 +8,13 @@ Penerbit : Yap
 Jumlah Halaman : 23
 Tahun Terbit : 20004
 Jumlah Tersedia : 12
+Id Buku : 1976079872
+judul Buku : Affan
+
+Penulis : dfghh
+
+Penerbit : defgh
+
+Jumlah Halaman : 34
+Tahun Terbit : 2004
+Jumlah Tersedia : 2

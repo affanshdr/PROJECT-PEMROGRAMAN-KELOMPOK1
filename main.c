@@ -67,7 +67,7 @@ typedef struct
         scanf("%u", &Buku.Jumlah_Tersedia);
         
         
-        fprintf(fp, "Id Buku : %u\njudul Buku : %s\nPenulis : %s\nPenerbit : %s\nJumlah Halaman : %u\nTahun Terbit : %u\nJumlah Tersedia : %u\n", 
+        fprintf(fp, "Id Buku : %u\njudul Buku : %s\nPenulis : %s\nPenerbit : %s\nJumlah Halaman : %u\nTahun Terbit : %u\nJumlah Tersedia : %u\n\n", 
                 Buku.Id_Buku, Buku.Judul, Buku.Penulis, Buku.Penerbit, Buku.Jumlah_Halaman, 
                 Buku.Tahun_Terbit, Buku.Jumlah_Tersedia);
         
