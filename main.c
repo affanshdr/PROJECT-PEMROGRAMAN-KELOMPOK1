@@ -8,7 +8,7 @@ void Header(){
     printf("\n");
     printf(" +------------------------------------+\n");
     printf(" |      Selamat Datang Di Program     |\n");
-    printf(" |        Database Perpustakaan       |\n");
+    printf(" |            Perpustakaan            |\n");
     printf(" +------------------------------------+\n");
 }
 
@@ -19,93 +19,106 @@ void Clear_System() {
         system("clear");
     #endif
 }
-// ===========================================================
+void Header_Admin(){
+    printf(" +-------------------------------+\n");
+    printf(" |          Login Admin          |\n");
+    printf(" +-------------------------------+\n");
+}
 
-// Manajemen Data Perpus =====================================
+void Header_User(){
+    printf("+--------------------------------+\n");
+    printf("|            Login User          |\n");
+    printf("+--------------------------------+\n");
+}
+// Manajemen User =================================================
 
-typedef struct 
-{  
-    unsigned int Id_Buku;
-    char Judul[100], Penulis[100] , Penerbit[100] ;
-    unsigned int Jumlah_Halaman , Tahun_Terbit , Jumlah_Tersedia ;
+struct User {
+    char username[100];
+    char password[100];
+};
 
-} Perpus;
+// Fungsi untuk melakukan sign-up
+void SignUp() {
+    FILE *file = fopen("Data_User.txt", "w"); // Membuka file untuk menambahkan data
 
-//=============================================================
- 
-
-
-// Manajemen Admin ===========================================
-
-    void Create(){
-    Clear_System();
-    Perpus Buku;
-    unsigned int Id;
-    FILE* fp;
-    fp = fopen("Data_Buku.txt", "a"); 
-    printf("============================\n");
-    printf("      Input Data Buku       \n");
-    printf("============================\n");
-    if(fp == NULL){
-        printf("File Tidak Ditemukan...");
+    if (file == NULL) {
+        printf("Error: Gagal membuka file.\n");
+        return;
     }
-    else {
-        printf("\n Id Buku         (int)   : "); 
-        scanf("%u", &Id); 
-        getchar(); 
-        printf("\n Judul Buku      (char)  : "); 
-        fgets(Buku.Judul, sizeof(Buku.Judul), stdin); 
-        printf("\n Penulis         (char)  : "); 
-        fgets(Buku.Penulis, sizeof(Buku.Penulis), stdin);
-        printf("\n Penerbit        (char)  : "); 
-        fgets(Buku.Penerbit, sizeof(Buku.Penerbit), stdin);
-        printf("\n Jumlah Halaman  (int)   : "); 
-        scanf("%u", &Buku.Jumlah_Halaman);
-        printf("\n Tahun Terbit    (int)   : "); 
-        scanf("%u", &Buku.Tahun_Terbit);
-        printf("\n Jumlah Tersedia (int)   : "); 
-        scanf("%u", &Buku.Jumlah_Tersedia);
-        
-        
-        fprintf(fp, "Id Buku : %u\njudul Buku : %s\nPenulis : %s\nPenerbit : %s\nJumlah Halaman : %u\nTahun Terbit : %u\nJumlah Tersedia : %u\n\n", 
-                Buku.Id_Buku, Buku.Judul, Buku.Penulis, Buku.Penerbit, Buku.Jumlah_Halaman, 
-                Buku.Tahun_Terbit, Buku.Jumlah_Tersedia);
-        
-        fclose(fp); 
+
+    struct User newUser;
+
+    printf("Masukkan username: ");
+    fgets(newUser.username, 100, stdin);
+    strtok(newUser.username, "\n"); // Menghapus karakter newline dari input username
+
+    printf("Masukkan password: ");
+    fgets(newUser.password, 100, stdin);
+    strtok(newUser.password, "\n"); // Menghapus karakter newline dari input password
+
+    fprintf(file, "%s\n%s\n", newUser.username, newUser.password);
+    printf("Sign-up berhasil!\n");
+
+    fclose(file);
+}
+
+// Fungsi untuk melakukan login
+void Login(int *Selesai2) {
+    char inputUsername[100];
+    char inputPassword[100];
+
+    printf("Masukkan username: ");
+    fgets(inputUsername, 100, stdin);
+    strtok(inputUsername, "\n"); // Menghapus karakter newline dari input username
+
+    printf("Masukkan password: ");
+    fgets(inputPassword, 100, stdin);
+    strtok(inputPassword, "\n"); // Menghapus karakter newline dari input password
+
+    FILE *file = fopen("Data_user", "r"); // Membuka file untuk membaca data
+
+    if (file == NULL) {
+        printf("Error: Gagal membuka file.\n");
+        return;
     }
+
+    struct User user;
+    char tempUsername[100];
+    char tempPassword[100];
+    int found = 0;
+
+    // Memeriksa setiap baris dalam file
+    while (fgets(tempUsername, 100, file) != NULL) {
+        fgets(tempPassword, 100, file); // Membaca password dari baris berikutnya
+        strtok(tempUsername, "\n"); // Menghapus karakter newline dari input username
+        strtok(tempPassword, "\n"); // Menghapus karakter newline dari input password
+
+        // Memeriksa apakah username cocok
+        if (strcmp(tempUsername, inputUsername) == 0) {
+            found = 1;
+            // Memeriksa apakah password cocok
+            if (strcmp(tempPassword, inputPassword) == 0) {
+                printf("Login berhasil!\n");
+                (*Selesai2)+=1;
+                fclose(file);
+                return;
+            } else {
+                printf("Password salah.\n");
+                fclose(file);
+                return;
+            }
+        }
+    }
+
+    if (!found) {
+        printf("Username tidak ditemukan.\n");
+    }
+
+    fclose(file);
 }
 
-void Delete(){
-
-}
-
-void Update(){
 
 
-
-
-}
-
-// ===========================================================
-
-
-
-
-// Manajemen User ========================================
-typedef struct {
-    char Username[100];
-    char Password[100];
-} Identitas;
-
-Identitas Login_Pengguna(){
-    Identitas Identitas_Fix;
-    printf("\n Username User: ");
-    fgets(Identitas_Fix.Username, sizeof(Identitas_Fix.Username), stdin);
-    
-    printf(" Password User: ");
-    fgets(Identitas_Fix.Password, sizeof(Identitas_Fix.Password), stdin);
-    return Identitas_Fix;
-}
 // ===========================================================
 
 
@@ -113,21 +126,56 @@ Identitas Login_Pengguna(){
 int main(){
 
     // Variabel
-    int Pil, Pil1 , Pil2 ;
-    int Selesai = 0;
-    int Selesai2;
-
-
+    int Pil  ; // Admin & user dll
+    int Pil1 ; // Sign up / login dll
+    int Pil2 ;  
+    int Selesai  = 0;   // Loop pada Opsi Admin & user
+    int Selesai2 = 0;   // Login page
     Clear_System();
     Header();
     
-    while(!Selesai){
-
+      do {
         printf("\n   Anda Login Sebagai ?\n");
         printf("\n   1. Admin \n   2. User\n");
         printf("\n   Pilihan Anda (1 / 2) : ");
         scanf("%d", &Pil);
+        while (getchar() != '\n'); 
+
+        if (Pil != 1 && Pil != 2) {
+            printf("\n   Pilihan tidak valid. Silakan masukkan 1 atau 2.\n");
+        } else {
+            Selesai = 1; 
+        }
+    } while (!Selesai);
+
+    if (Pil == 1){
+        Clear_System();
+        Header_Admin();
+        printf("\n1. Sign-up\n2. Login\n3. Keluar\n");
+        printf("Pilihan Anda: ");
+        scanf("%d", &Pil1);
         while (getchar() != '\n');
+        SignUp();
+        Login(&Selesai2);
+        printf("Nilai Selesai %d\n", Selesai2);
+        printf("1. Create Buku\n");
+        printf("2. Hapus Buku\n");
+        printf("3. Edit Buku\n");
+        printf("Masukan Opsi: ");
+        scanf("%d", &Pil1);
+
+        do{
+
+        } while(Pil1 == 4);
+        
+
+    }
+
+    return 0;
+}
+
+
+        /*
         switch (Pil){
             case 1:
                 
@@ -207,8 +255,9 @@ int main(){
                 continue;
         
         }
+        */
+       //return 0;
+    //}
+    
 
-    }
-    return 0;
-}
 
