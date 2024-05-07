@@ -1,13 +1,12 @@
 #include "Header.h"
 
-int main(){
+void List_Buku(){
     char buffer[512];
     Perpus buku[20];
     FILE * fp;
     fp = fopen("Data_Buku.txt", "r");
     if(fp == NULL){
         printf("File Error while reading...");
-        return EXIT_FAILURE;
     }
     
     int data = 0;
@@ -34,6 +33,4 @@ int main(){
         }
         
     printf("\n\n");
-    
-    return EXIT_SUCCESS;
 }
