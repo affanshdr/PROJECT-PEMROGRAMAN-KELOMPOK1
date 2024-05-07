@@ -13,6 +13,6 @@ typedef struct
 void header();
 void Clear_System();
 void List_Buku();
-void Create_Buku(Perpus *);
-void Delete_Buku(Perpus *);
-void Update_Buku(Perpus *);
+void Create_Buku();
+void Delete_Buku();
+void Update_Buku();
