@@ -99,7 +99,7 @@ void Login(int *Selesai2) {
             // Memeriksa apakah password cocok
             if (strcmp(tempPassword, inputPassword) == 0) {
                 printf("Login berhasil!\n");
-                (*Selesai2)+=1;
+                (*Selesai2)=1;
                 fclose(file);
                 return;
             } else {
@@ -128,7 +128,7 @@ int main(){
     // Variabel
     int Pil  ; // Admin & user dll
     int Pil1 ; // Sign up / login dll
-    int Pil2 ;  
+    int Pil2 ;  // Opsi Data
     int Selesai  = 0;   // Loop pada Opsi Admin & user
     int Selesai2 = 0;   // Login page
     Clear_System();
@@ -151,26 +151,37 @@ int main(){
     if (Pil == 1){
         Clear_System();
         Header_Admin();
-        printf("\n1. Sign-up\n2. Login\n3. Keluar\n");
-        printf("Pilihan Anda: ");
-        scanf("%d", &Pil1);
-        while (getchar() != '\n');
-        SignUp();
-        Login(&Selesai2);
-        printf("Nilai Selesai %d\n", Selesai2);
-        printf("1. Create Buku\n");
-        printf("2. Hapus Buku\n");
-        printf("3. Edit Buku\n");
-        printf("Masukan Opsi: ");
-        scanf("%d", &Pil1);
-
         do{
+            printf("\n1. Sign-up\n2. Login\n3. Keluar\n");
+            printf("Pilihan Anda: ");
+            scanf("%d", &Pil1);
+            while (getchar() != '\n');
+            //SignUp();
+            if(Pil1 == 1){
+                SignUp();
+            }
+            if(Pil1 == 2){
+                Login(&Selesai2);
+            }
+            Login(&Selesai2);
+            Clear_System();
+            printf("Nilai Selesai %d\n", Selesai2);
+            printf("1. Create Buku\n");
+            printf("2. Hapus Buku\n");
+            printf("3. Edit Buku\n");
+            printf("Masukan Opsi: ");
+            scanf("%d", &Pil2);
+            
+            switch(Pil2){
+                case 1: printf("Create Buku");
+                case 2: printf("Hapus Buku");
+                case 3: printf("Edit Buku");
+            
+            }
+        }  while (Pil1 == 3); 
 
-        } while(Pil1 == 4);
+    }   
         
-
-    }
-
     return 0;
 }
 
