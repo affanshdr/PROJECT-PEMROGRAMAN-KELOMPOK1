@@ -10,8 +10,19 @@ typedef struct
     unsigned int Jumlah_halaman, Tahun_terbit, Jumlah_tersedia;
 } Perpus;
 
-void header();
+typedef struct 
+{
+    char username[100];
+    char password[100];
+} User;
+
+
+void Header();
 void Clear_System();
+void Header_Admin();
+void Header_User();
+void SignUp();
+void Login(int);
 void List_Buku();
 void Create_Buku();
 void Delete_Buku();
