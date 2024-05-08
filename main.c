@@ -156,7 +156,7 @@ int main(){
             printf("Pilihan Anda: ");
             scanf("%d", &Pil1);
             while (getchar() != '\n');
-            //SignUp();
+            
             if(Pil1 == 1){
                 SignUp();
             }
@@ -173,12 +173,22 @@ int main(){
             scanf("%d", &Pil2);
             
             switch(Pil2){
-                case 1: printf("Create Buku");
-                case 2: printf("Hapus Buku");
-                case 3: printf("Edit Buku");
-            
+                case 1: printf("Create Buku\n");
+                case 2: printf("Hapus Buku\n");
+                case 3: printf("Edit Buku\n");
+                default: printf("Mohon Masukkan Opsi Dengan Benar");
+                         continue;
             }
         }  while (Pil1 == 3); 
+
+    }
+
+    if (Pil == 2){
+
+        Clear_System();
+        Header_Admin();
+
+
 
     }   
         
