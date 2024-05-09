@@ -126,73 +126,85 @@ void Login(int *Selesai2) {
 int main(){
 
     // Variabel
-    int Pil  ; // Admin & user dll
-    int Pil1 ; // Sign up / login dll
+    int Pilihan_Mode  ; // Admin & user dll
+    int Pilihan_Log ; // Sign up / login dll
     int Pil2 ;  // Opsi Data
-    int Selesai  = 0;   // Loop pada Opsi Admin & user
-    int Selesai2 = 0;   // Login page
+    int Berhasil  = 0;   // Loop pada Opsi Admin & user
+    int Berhasil2 = 0;   // Login page
     Clear_System();
     Header();
     
-      do {
+    do {
+        while(!Berhasil){
+        Clear_System();
+        Header();
         printf("\n   Anda Login Sebagai ?\n");
-        printf("\n   1. Admin \n   2. User\n");
+        printf("\n   1. Admin \n   2. User\n 3.Keluar\n");
         printf("\n   Pilihan Anda (1 / 2) : ");
-        scanf("%d", &Pil);
+        scanf("%d", &Pilihan_Mode);
         while (getchar() != '\n'); 
 
-        if (Pil != 1 && Pil != 2) {
-            printf("\n   Pilihan tidak valid. Silakan masukkan 1 atau 2.\n");
+        if (Pilihan_Mode < 1 || Pilihan_Mode > 3) {
+        printf("\n   Pilihan tidak valid. Silakan masukkan 1 atau 2.\n");
         } else {
-            Selesai = 1; 
+        Berhasil = 1; 
         }
-    } while (!Selesai);
+        }
+     
 
-    if (Pil == 1){
-        Clear_System();
-        Header_Admin();
-        do{
-            printf("\n1. Sign-up\n2. Login\n3. Keluar\n");
-            printf("Pilihan Anda: ");
-            scanf("%d", &Pil1);
-            while (getchar() != '\n');
-            
-            if(Pil1 == 1){
-                SignUp();
-            }
-            if(Pil1 == 2){
-                Login(&Selesai2);
-            }
-            Login(&Selesai2);
+        if (Pilihan_Mode == 1){
+            Berhasil = 0;
             Clear_System();
-            printf("Nilai Selesai %d\n", Selesai2);
-            printf("1. Create Buku\n");
-            printf("2. Hapus Buku\n");
-            printf("3. Edit Buku\n");
-            printf("Masukan Opsi: ");
-            scanf("%d", &Pil2);
+            Header_Admin();
+            do{
+                printf("\n1. Sign-up\n2. Login\n3. Kembali\n");
+                printf("Pilihan Anda: ");
+                scanf("%d", &Pilihan_Log);
+                while (getchar() != '\n');
             
-            switch(Pil2){
-                case 1: printf("Create Buku\n");
-                case 2: printf("Hapus Buku\n");
-                case 3: printf("Edit Buku\n");
-                default: printf("Mohon Masukkan Opsi Dengan Benar");
-                         continue;
-            }
-        }  while (Pil1 == 3); 
+                if(Pilihan_Log == 1){
+                    Clear_System();
+                    SignUp();
+                }
+                if(Pilihan_Log == 2){
+                    Clear_System();
+                    Login(&Berhasil2);
+                    //pegecekan
+                }
+        
+            
+            }while (Pilihan_Log != 3); 
 
     }
 
-    if (Pil == 2){
+// -------------------------------------------------------------------------------------------
 
+        if (Pilihan_Mode == 2){
+        Berhasil = 0;
         Clear_System();
         Header_Admin();
 
+        do{
+            printf("\n1. Sign-up\n2. Login\n3. Kembali\n");
+            printf("Pilihan Anda: ");
+            scanf("%d", &Pilihan_Log);
+            while (getchar() != '\n');
+            
+            if(Pilihan_Log == 1){
+                SignUp();
+            }
+            if(Pilihan_Log == 2){
+                Login(&Berhasil2);
+                //pengecekan
+            }
+                    
+            }while (Pilihan_Log != 3); 
+        }
 
+    } while (Pilihan_Mode != 3);  
 
-    }   
-        
     return 0;
+
 }
 
 
