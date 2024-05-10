@@ -25,10 +25,22 @@ void Header_Admin(){
     printf(" +-------------------------------+\n");
 }
 
+void Sign_Up(){
+    printf(" +--------------------------------+\n");
+    printf(" |             Sign Up            |\n");
+    printf(" +--------------------------------+\n");
+}
+
+void Log_In(){
+    printf(" +--------------------------------+\n");
+    printf(" |              Login             |\n");
+    printf(" +--------------------------------+\n");
+}
+
 void Header_User(){
-    printf("+--------------------------------+\n");
-    printf("|            Login User          |\n");
-    printf("+--------------------------------+\n");
+    printf(" +--------------------------------+\n");
+    printf(" |            Login User          |\n");
+    printf(" +--------------------------------+\n");
 }
 
 struct User {
@@ -46,11 +58,11 @@ void SignUp() {
 
     struct User newUser;
 
-    printf("Masukkan username: ");
+    printf("\n  Masukkan username: ");
     fgets(newUser.username, 100, stdin);
     strtok(newUser.username, "\n"); // Menghapus karakter newline dari input username
 
-    printf("Masukkan password: ");
+    printf("  Masukkan password: ");
     fgets(newUser.password, 100, stdin);
     strtok(newUser.password, "\n"); // Menghapus karakter newline dari input password
 
@@ -64,11 +76,11 @@ void Login(int *Selesai2, char *username) {
     char inputUsername[100];
     char inputPassword[100];
 
-    printf("Masukkan username: ");
+    printf("\n  Masukkan username: ");
     fgets(inputUsername, 100, stdin);
     strtok(inputUsername, "\n"); // Menghapus karakter newline dari input username
 
-    printf("Masukkan password: ");
+    printf("  Masukkan password: ");
     fgets(inputPassword, 100, stdin);
     strtok(inputPassword, "\n"); // Menghapus karakter newline dari input password
 
@@ -137,17 +149,19 @@ int main(){
             Clear_System();
             Header_Admin();
             do {
-                printf("\n1. Sign-up\n2. Login\n3. Kembali\n");
-                printf("Pilihan Anda: ");
+                printf("\n  1. Sign-up\n  2. Login\n  3. Kembali\n");
+                printf("\n  Pilihan Anda: ");
                 scanf("%d", &Pilihan_Log);
                 while (getchar() != '\n');
             
                 if (Pilihan_Log == 1) {
                     Clear_System();
+                    Sign_Up();
                     SignUp();
                 }
                 if (Pilihan_Log == 2) {
                     Clear_System();
+                    Log_In();
                     Login(&Berhasil2, username); // Menyimpan username yang berhasil login
                     if (Berhasil2 == 1) {
                         do{
@@ -162,8 +176,10 @@ int main(){
                                 case 1:
                                     break;
                                 case 2:
+
                                     break;
                                 case 3:
+
                                     break;
                             }
 
@@ -181,18 +197,22 @@ int main(){
         if (Pilihan_Mode == 2) {
             Berhasil = 0;
             Clear_System();
-            Header_Admin();
+            Header_User();
 
             do {
-                printf("\n1. Sign-up\n2. Login\n3. Kembali\n");
-                printf("Pilihan Anda: ");
+                printf("\n  1. Sign-up\n  2. Login\n  3. Kembali\n");
+                printf("\n  Pilihan Anda: ");
                 scanf("%d", &Pilihan_Log);
                 while (getchar() != '\n');
             
                 if (Pilihan_Log == 1) {
+                    Clear_System();
+                    Sign_Up();
                     SignUp();
                 }
                 if (Pilihan_Log == 2) {
+                    Clear_System();
+                    Log_In();
                     Login(&Berhasil2, username); // Menyimpan username yang berhasil login
                     if (Berhasil2 == 1) {
                         printf("Selamat datang, %s!\n", username);
