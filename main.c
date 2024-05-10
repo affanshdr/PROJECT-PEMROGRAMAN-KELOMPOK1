@@ -48,8 +48,79 @@ struct User {
     char password[100];
 };
 
+void SignUpAdmin() {
+    
+    FILE *file = fopen("Data_Admin.txt", "w"); // Menambahkan data ke file
+
+    if (file == NULL) {
+        printf("Error: Gagal membuka file.\n");
+        return;
+    }
+
+    struct User newUser;
+
+    printf("\n  Masukkan username: ");
+    fgets(newUser.username, 100, stdin);
+    strtok(newUser.username, "\n"); // Menghapus karakter newline dari input username
+
+    printf("  Masukkan password: ");
+    fgets(newUser.password, 100, stdin);
+    strtok(newUser.password, "\n"); // Menghapus karakter newline dari input password
+
+    fprintf(file, "%s\n%s\n", newUser.username, newUser.password);
+    printf("  Sign-up berhasil!\n");
+
+    fclose(file);
+}
+
+void LoginAdmin(int *Selesai2, char *username) {
+    char inputUsername[100];
+    char inputPassword[100];
+
+    printf("\n  Masukkan username: ");
+    fgets(inputUsername, 100, stdin);
+    strtok(inputUsername, "\n"); // Menghapus karakter newline dari input username
+
+    printf("  Masukkan password: ");
+    fgets(inputPassword, 100, stdin);
+    strtok(inputPassword, "\n"); // Menghapus karakter newline dari input password
+
+    FILE *file = fopen("Data_User.txt", "r"); // Membuka file untuk membaca data
+
+    if (file == NULL) {
+        printf("Error: Gagal membuka file.\n");
+        return;
+    }
+
+    struct User user;
+    char tempUsername[100];
+    char tempPassword[100];
+    int found = 0;
+
+    // Memeriksa setiap baris dalam file
+    while (fgets(tempUsername, 100, file) != NULL) {
+        fgets(tempPassword, 100, file); // Membaca password dari baris berikutnya
+        strtok(tempUsername, "\n"); // Menghapus karakter newline dari input username
+        strtok(tempPassword, "\n"); // Menghapus karakter newline dari input password
+
+        // Memeriksa apakah username dan password cocok
+        if (strcmp(tempUsername, inputUsername) == 0 && strcmp(tempPassword, inputPassword) == 0) {
+            printf("  Login berhasil!\n");
+            (*Selesai2) = 1;
+            strcpy(username, inputUsername); // Menyimpan username yang berhasil login
+            fclose(file);
+            return;
+        }
+    }
+
+    printf("  Username atau password salah.\n");
+    fclose(file);
+}
+
+//------------------------------------------------------------------------------------------------------------
 void SignUp() {
-    FILE *file = fopen("Data_User.txt", "a"); // Menambahkan data ke file
+
+    FILE *file = fopen("Data_User.txt", "w"); // Menambahkan data ke file
 
     if (file == NULL) {
         printf("Error: Gagal membuka file.\n");
@@ -157,15 +228,15 @@ int main(){
                 if (Pilihan_Log == 1) {
                     Clear_System();
                     Sign_Up();
-                    SignUp();
+                    SignUpAdmin();
                 }
                 if (Pilihan_Log == 2) {
                     Clear_System();
                     Log_In();
-                    Login(&Berhasil2, username); // Menyimpan username yang berhasil login
+                    LoginAdmin(&Berhasil2, username); // Menyimpan username yang berhasil login
                     if (Berhasil2 == 1) {
                         do{
-                        printf("  Selamat datang, %s!\n", username);
+                        printf("\n  Selamat datang, %s!\n", username);
                         Berhasil2 = 0; 
                         printf("\n  1. Create \n  2. Delete\n  3. Update\n  4. Keluar\n");
                         printf("  Pilihan Anda: ");
@@ -224,10 +295,10 @@ int main(){
                     if (Berhasil2 == 1) {
                         Berhasil2= 0; // Menampilkan pesan selamat datang dengan username
                         do{
-                        printf("Selamat datang, %s!\n", username);
+                        printf("\n  Selamat datang, %s!\n", username);
                         Berhasil2 = 0; 
                         printf("\n  1. List Buku yang tersedia \n  2. Pinjam Buku\n  3. List Buku yg dipinjam\n  4. Kembalikan Buku\n  5. Keluar\n");
-                        printf("Pilihan Anda: ");
+                        printf("  Pilihan Anda: ");
                         scanf("%d", &Pilihan_Opsi);
                         while (getchar() != '\n');
 
@@ -255,7 +326,6 @@ int main(){
 
 
                             }
-
 
                         } while (Pilihan_Opsi != 5);
                         // Lanjutan login
