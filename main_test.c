@@ -67,7 +67,7 @@ void SignUp() {
     strtok(newUser.password, "\n"); // Menghapus karakter newline dari input password
 
     fprintf(file, "%s\n%s\n", newUser.username, newUser.password);
-    printf("Sign-up berhasil!\n");
+    printf("  Sign-up berhasil!\n");
 
     fclose(file);
 }
@@ -104,7 +104,7 @@ void Login(int *Selesai2, char *username) {
 
         // Memeriksa apakah username dan password cocok
         if (strcmp(tempUsername, inputUsername) == 0 && strcmp(tempPassword, inputPassword) == 0) {
-            printf("Login berhasil!\n");
+            printf("  Login berhasil!\n");
             (*Selesai2) = 1;
             strcpy(username, inputUsername); // Menyimpan username yang berhasil login
             fclose(file);
@@ -112,7 +112,7 @@ void Login(int *Selesai2, char *username) {
         }
     }
 
-    printf("Username atau password salah.\n");
+    printf("  Username atau password salah.\n");
     fclose(file);
 }
 
@@ -165,7 +165,7 @@ int main(){
                     Login(&Berhasil2, username); // Menyimpan username yang berhasil login
                     if (Berhasil2 == 1) {
                         do{
-                        printf("Selamat datang, %s!\n", username);
+                        printf("  Selamat datang, %s!\n", username);
                         Berhasil2 = 0; 
                         printf("\n1. Create \n2. Delete\n3. Update\n 4. Keluar");
                         printf("Pilihan Anda: ");
@@ -215,7 +215,6 @@ int main(){
                     Log_In();
                     Login(&Berhasil2, username); // Menyimpan username yang berhasil login
                     if (Berhasil2 == 1) {
-                        printf("Selamat datang, %s!\n", username);
                         Berhasil2= 0; // Menampilkan pesan selamat datang dengan username
                         do{
                         printf("Selamat datang, %s!\n", username);
