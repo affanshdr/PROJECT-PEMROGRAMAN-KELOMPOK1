@@ -85,7 +85,7 @@ void LoginAdmin(int *Selesai2, char *username) {
     fgets(inputPassword, 100, stdin);
     strtok(inputPassword, "\n"); // Menghapus karakter newline dari input password
 
-    FILE *file = fopen("Data_User.txt", "r"); // Membuka file untuk membaca data
+    FILE *file = fopen("Data_Admin.txt", "r"); // Membuka file untuk membaca data
 
     if (file == NULL) {
         printf("Error: Gagal membuka file.\n");
