@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-// Manajemen sistem =========================================
 void Header(){
     printf("\n");
     printf(" +------------------------------------+\n");
@@ -19,27 +18,38 @@ void Clear_System() {
         system("clear");
     #endif
 }
+
 void Header_Admin(){
     printf(" +-------------------------------+\n");
     printf(" |          Login Admin          |\n");
     printf(" +-------------------------------+\n");
 }
 
-void Header_User(){
-    printf("+--------------------------------+\n");
-    printf("|            Login User          |\n");
-    printf("+--------------------------------+\n");
+void Sign_Up(){
+    printf(" +--------------------------------+\n");
+    printf(" |             Sign Up            |\n");
+    printf(" +--------------------------------+\n");
 }
-// Manajemen User =================================================
+
+void Log_In(){
+    printf(" +--------------------------------+\n");
+    printf(" |              Login             |\n");
+    printf(" +--------------------------------+\n");
+}
+
+void Header_User(){
+    printf(" +--------------------------------+\n");
+    printf(" |            Login User          |\n");
+    printf(" +--------------------------------+\n");
+}
 
 struct User {
     char username[100];
     char password[100];
 };
 
-// Fungsi untuk melakukan sign-up
 void SignUp() {
-    FILE *file = fopen("Data_User.txt", "w"); // Membuka file untuk menambahkan data
+    FILE *file = fopen("Data_User.txt", "a"); // Menambahkan data ke file
 
     if (file == NULL) {
         printf("Error: Gagal membuka file.\n");
@@ -48,30 +58,29 @@ void SignUp() {
 
     struct User newUser;
 
-    printf("Masukkan username: ");
+    printf("\n  Masukkan username: ");
     fgets(newUser.username, 100, stdin);
     strtok(newUser.username, "\n"); // Menghapus karakter newline dari input username
 
-    printf("Masukkan password: ");
+    printf("  Masukkan password: ");
     fgets(newUser.password, 100, stdin);
     strtok(newUser.password, "\n"); // Menghapus karakter newline dari input password
 
     fprintf(file, "%s\n%s\n", newUser.username, newUser.password);
-    printf("Sign-up berhasil!\n");
+    printf("  Sign-up berhasil!\n");
 
     fclose(file);
 }
 
-// Fungsi untuk melakukan login
-void Login(int *Selesai2) {
+void Login(int *Selesai2, char *username) {
     char inputUsername[100];
     char inputPassword[100];
 
-    printf("Masukkan username: ");
+    printf("\n  Masukkan username: ");
     fgets(inputUsername, 100, stdin);
     strtok(inputUsername, "\n"); // Menghapus karakter newline dari input username
 
-    printf("Masukkan password: ");
+    printf("  Masukkan password: ");
     fgets(inputPassword, 100, stdin);
     strtok(inputPassword, "\n"); // Menghapus karakter newline dari input password
 
@@ -93,211 +102,169 @@ void Login(int *Selesai2) {
         strtok(tempUsername, "\n"); // Menghapus karakter newline dari input username
         strtok(tempPassword, "\n"); // Menghapus karakter newline dari input password
 
-        // Memeriksa apakah username cocok
-        if (strcmp(tempUsername, inputUsername) == 0) {
-            found = 1;
-            // Memeriksa apakah password cocok
-            if (strcmp(tempPassword, inputPassword) == 0) {
-                printf("Login berhasil!\n");
-                (*Selesai2)=1;
-                fclose(file);
-                return;
-            } else {
-                printf("Password salah.\n");
-                fclose(file);
-                return;
-            }
+        // Memeriksa apakah username dan password cocok
+        if (strcmp(tempUsername, inputUsername) == 0 && strcmp(tempPassword, inputPassword) == 0) {
+            printf("  Login berhasil!\n");
+            (*Selesai2) = 1;
+            strcpy(username, inputUsername); // Menyimpan username yang berhasil login
+            fclose(file);
+            return;
         }
     }
 
-    if (!found) {
-        printf("Username tidak ditemukan.\n");
-    }
-
+    printf("  Username atau password salah.\n");
     fclose(file);
 }
 
-
-
-// ===========================================================
-
-
-
 int main(){
-
-    // Variabel
-    int Pilihan_Mode  ; // Admin & user dll
-    int Pilihan_Log ; // Sign up / login dll
-    int Pil2 ;  // Opsi Data
-    int Berhasil  = 0;   // Loop pada Opsi Admin & user
-    int Berhasil2 = 0;   // Login page
+    int Pilihan_Mode;
+    int Pilihan_Log;
+    int Pilihan_Opsi;
+    int Berhasil = 0;
+    int Berhasil2 = 0;
+    int Berhasil3 = 0;
+    char username[100]; // Variabel untuk menyimpan username yang berhasil login
     Clear_System();
     Header();
     
     do {
-        while(!Berhasil){
-        Clear_System();
-        Header();
-        printf("\n   Anda Login Sebagai ?\n");
-        printf("\n   1. Admin \n   2. User\n 3.Keluar\n");
-        printf("\n   Pilihan Anda (1 / 2) : ");
-        scanf("%d", &Pilihan_Mode);
-        while (getchar() != '\n'); 
+        while (!Berhasil) {
+            Clear_System();
+            Header();
+            printf("\n   Anda Login Sebagai ?\n");
+            printf("\n   1. Admin \n   2. User\n   3. Keluar\n");
+            printf("\n   Pilihan Anda ( 1 - 3 ) : ");
+            scanf("%d", &Pilihan_Mode);
+            while (getchar() != '\n');
 
-        if (Pilihan_Mode < 1 || Pilihan_Mode > 3) {
-        printf("\n   Pilihan tidak valid. Silakan masukkan 1 atau 2.\n");
-        } else {
-        Berhasil = 1; 
+            if (Pilihan_Mode < 1 || Pilihan_Mode > 3) {
+                printf("\n   Pilihan tidak valid. Silakan masukkan 1, 2, atau 3.\n");
+            } else {
+                Berhasil = 1; 
+            }
         }
-        }
-     
 
-        if (Pilihan_Mode == 1){
+        if (Pilihan_Mode == 1) {
             Berhasil = 0;
             Clear_System();
             Header_Admin();
-            do{
-                printf("\n1. Sign-up\n2. Login\n3. Kembali\n");
-                printf("Pilihan Anda: ");
+            do {
+                printf("\n  1. Sign-up\n  2. Login\n  3. Kembali\n");
+                printf("\n  Pilihan Anda: ");
                 scanf("%d", &Pilihan_Log);
                 while (getchar() != '\n');
             
-                if(Pilihan_Log == 1){
+                if (Pilihan_Log == 1) {
                     Clear_System();
+                    Sign_Up();
                     SignUp();
                 }
-                if(Pilihan_Log == 2){
+                if (Pilihan_Log == 2) {
                     Clear_System();
-                    Login(&Berhasil2);
-                    if (Berhasil2 == 1){
+                    Log_In();
+                    Login(&Berhasil2, username); // Menyimpan username yang berhasil login
+                    if (Berhasil2 == 1) {
+                        do{
+                        printf("  Selamat datang, %s!\n", username);
+                        Berhasil2 = 0; 
+                        printf("\n  1. Create \n  2. Delete\n  3. Update\n  4. Keluar\n");
+                        printf("  Pilihan Anda: ");
+                        scanf("%d", &Pilihan_Opsi);
+                        while (getchar() != '\n');
+
+                            switch(Pilihan_Opsi){
+                                case 1:
+                                Clear_System();
+                                printf("\n  Create \n");
+                                system("pause");
+                                break;
+                                case 2:
+                                Clear_System();
+                                printf("\n  Delete \n");
+                                system("pause");
+                                break;
+                                case 3:
+                                Clear_System();
+                                printf("\n  Update \n");
+                                system("pause");
+                                    break;
+                            }
+
+
+                        } while (Pilihan_Opsi != 4);
                         
-                        //lanjutan login
+                        
+                       
                     }
                 }
         
+            } while (Pilihan_Log != 3); 
+        }
+
+        if (Pilihan_Mode == 2) {
+            Berhasil = 0;
+            Clear_System();
+            Header_User();
+
+            do {
+                printf("\n  1. Sign-up\n  2. Login\n  3. Kembali\n");
+                printf("\n  Pilihan Anda: ");
+                scanf("%d", &Pilihan_Log);
+                while (getchar() != '\n');
             
-            }while (Pilihan_Log != 3); 
-
-    }
-
-// -------------------------------------------------------------------------------------------
-
-        if (Pilihan_Mode == 2){
-        Berhasil = 0;
-        Clear_System();
-        Header_Admin();
-
-        do{
-            printf("\n1. Sign-up\n2. Login\n3. Kembali\n");
-            printf("Pilihan Anda: ");
-            scanf("%d", &Pilihan_Log);
-            while (getchar() != '\n');
-            
-            if(Pilihan_Log == 1){
-                Clear_System();
-                SignUp();
-            }
-            if(Pilihan_Log == 2){
-                Clear_System();
-                Login(&Berhasil2);
-                if (Berhasil2 == 1){
-                    //lanjutan login
+                if (Pilihan_Log == 1) {
+                    Clear_System();
+                    Sign_Up();
+                    SignUp();
                 }
-            }
-                    
-            }while (Pilihan_Log != 3); 
+                if (Pilihan_Log == 2) {
+                    Clear_System();
+                    Log_In();
+                    Login(&Berhasil2, username); // Menyimpan username yang berhasil login
+                    if (Berhasil2 == 1) {
+                        Berhasil2= 0; // Menampilkan pesan selamat datang dengan username
+                        do{
+                        printf("Selamat datang, %s!\n", username);
+                        Berhasil2 = 0; 
+                        printf("\n  1. List Buku yang tersedia \n  2. Pinjam Buku\n  3. List Buku yg dipinjam\n  4. Kembalikan Buku\n  5. Keluar\n");
+                        printf("Pilihan Anda: ");
+                        scanf("%d", &Pilihan_Opsi);
+                        while (getchar() != '\n');
+
+                            switch(Pilihan_Opsi){
+                                case 1:
+                                Clear_System();
+                                printf("\n  List Buku\n ");
+                                system("pause");
+                                    break;
+                                case 2:
+                                Clear_System();
+                                printf("\n  Pinjam Buku \n ");
+                                system("pause");
+                                    break;
+                                case 3:
+                                Clear_System();
+                                printf("\n  Kembali Buku \n ");
+                                system("pause");
+                                break;
+
+                                case 4:
+                                Clear_System();
+                                printf("\n  Buku yang Dipinjam \n ");
+                                system("pause");
+
+
+                            }
+
+
+                        } while (Pilihan_Opsi != 5);
+                        // Lanjutan login
+                    }
+                }
+            } while (Pilihan_Log != 3); 
         }
 
     } while (Pilihan_Mode != 3);  
 
     return 0;
-
 }
-
-
-        /*
-        switch (Pil){
-            case 1:
-                
-        
-                Clear_System();
-                printf(" +-------------------------------+\n");
-                printf(" |          Login Admin          |\n");
-                printf(" +-------------------------------+\n");
-                Identitas Identitas_User = Login_Pengguna(); // Username && Password
-                printf("\nSelamat Datang %s", Identitas_User.Username);
-                //printf("\nPass :  %s\n", Identitas_User.Password);
-                printf("1. Create Buku\n");
-                printf("2. Hapus Buku\n");
-                printf("3. Edit Buku\n");
-                printf("Masukan Opsi: ");
-                scanf("%d", &Pil1);
-                
-                switch (Pil1)
-                {
-                case 1:
-                    Create();
-                    break;
-                
-                case 2:
-                    printf("Berhasil 2.");
-                    break;
-                
-                case 3:
-                    printf("Berhasil 3.");
-                    break;
-                default:
-                    printf("Mohon Masukkan opsi dengan benar");
-                    continue;
-                }
-
-                Selesai = 1;
-                break;
-                
-            case 2 :
-                
-                Clear_System();
-                printf("+------------------------+\n");
-                printf("|       Login User       |\n");
-                printf("+------------------------+\n");
-               
-                printf("1. Lihat Buku\n");
-                printf("2. Pinjam Buku\n");
-                printf("3. List Buku yang Dipinjam\n");
-                printf("4. Balikkan Buku\n");
-                printf("\nOpsi Anda: ");
-                scanf("%d", &Pil2);
-                
-
-                switch (Pil2)
-                {
-                case 1:
-                    printf("1. Berhasil");
-                    break;
-                
-                case 2:
-                    printf("Berhasil 2.");
-                    break;
-                
-                case 3:
-                    printf("Berhasil 3.");
-                    break;
-                default:
-                    printf("Mohon Masukkan opsi dengan benar");
-                    continue;
-                }
-                //Work on it
-                Selesai = 1;
-                break;
-
-            default :
-                printf("Mohon masukkan input dengan benar !!\n");
-                continue;
-        
-        }
-        */
-       //return 0;
-    //}
-    
-
-

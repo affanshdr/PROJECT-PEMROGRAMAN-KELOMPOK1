@@ -133,7 +133,7 @@ int main(){
             Header();
             printf("\n   Anda Login Sebagai ?\n");
             printf("\n   1. Admin \n   2. User\n   3. Keluar\n");
-            printf("\n   Pilihan Anda (1 / 2) : ");
+            printf("\n   Pilihan Anda ( 1 - 3 ) : ");
             scanf("%d", &Pilihan_Mode);
             while (getchar() != '\n');
 
@@ -167,19 +167,23 @@ int main(){
                         do{
                         printf("  Selamat datang, %s!\n", username);
                         Berhasil2 = 0; 
-                        printf("\n1. Create \n2. Delete\n3. Update\n 4. Keluar");
-                        printf("Pilihan Anda: ");
+                        printf("\n  1. Create \n  2. Delete\n  3. Update\n  4. Keluar\n");
+                        printf("  Pilihan Anda: ");
                         scanf("%d", &Pilihan_Opsi);
                         while (getchar() != '\n');
 
                             switch(Pilihan_Opsi){
                                 case 1:
-                                    break;
+                                Clear_System();
+                                printf("\n  Create");
+                                break;
                                 case 2:
-
+                                Clear_System();
+                                    printf("\n  Delete");
                                     break;
                                 case 3:
-
+                                Clear_System();
+                                printf("\n  Update");
                                     break;
                             }
 
@@ -219,17 +223,23 @@ int main(){
                         do{
                         printf("Selamat datang, %s!\n", username);
                         Berhasil2 = 0; 
-                        printf("\n1. List Buku yang tersedia \n2. Pinjam Buku\n3. List Buku yg dipinjam\n 4. Kembalikan Buku\n 5. Keluar");
+                        printf("\n  1. List Buku yang tersedia \n  2. Pinjam Buku\n  3. List Buku yg dipinjam\n  4. Kembalikan Buku\n  5. Keluar\n");
                         printf("Pilihan Anda: ");
                         scanf("%d", &Pilihan_Opsi);
                         while (getchar() != '\n');
 
                             switch(Pilihan_Opsi){
                                 case 1:
+                                Clear_System();
+                                printf("\n  List Buku");
                                     break;
                                 case 2:
+                                Clear_System();
+                                printf("\n  Pinjam Buku");
                                     break;
                                 case 3:
+                                Clear_System();
+                                printf("\n  Kembali Buku");
                                     break;
                             }
 
