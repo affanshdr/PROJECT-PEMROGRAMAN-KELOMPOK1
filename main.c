@@ -75,7 +75,7 @@ void Login(int *Selesai2) {
     fgets(inputPassword, 100, stdin);
     strtok(inputPassword, "\n"); // Menghapus karakter newline dari input password
 
-    FILE *file = fopen("Data_user", "r"); // Membuka file untuk membaca data
+    FILE *file = fopen("Data_User.txt", "r"); // Membuka file untuk membaca data
 
     if (file == NULL) {
         printf("Error: Gagal membuka file.\n");
@@ -169,7 +169,10 @@ int main(){
                 if(Pilihan_Log == 2){
                     Clear_System();
                     Login(&Berhasil2);
-                    //pegecekan
+                    if (Berhasil2 == 1){
+                        
+                        //lanjutan login
+                    }
                 }
         
             
@@ -191,11 +194,15 @@ int main(){
             while (getchar() != '\n');
             
             if(Pilihan_Log == 1){
+                Clear_System();
                 SignUp();
             }
             if(Pilihan_Log == 2){
+                Clear_System();
                 Login(&Berhasil2);
-                //pengecekan
+                if (Berhasil2 == 1){
+                    //lanjutan login
+                }
             }
                     
             }while (Pilihan_Log != 3); 

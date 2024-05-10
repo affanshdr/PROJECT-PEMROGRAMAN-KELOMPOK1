@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-// Manajemen sistem =========================================
 void Header(){
     printf("\n");
     printf(" +------------------------------------+\n");
@@ -31,16 +30,14 @@ void Header_User(){
     printf("|            Login User          |\n");
     printf("+--------------------------------+\n");
 }
-// Manajemen User =================================================
 
 struct User {
     char username[100];
     char password[100];
 };
 
-// Fungsi untuk melakukan sign-up
 void SignUp() {
-    FILE *file = fopen("Data_User.txt", "w"); // Membuka file untuk menambahkan data
+    FILE *file = fopen("Data_User.txt", "a"); // Menambahkan data ke file
 
     if (file == NULL) {
         printf("Error: Gagal membuka file.\n");
@@ -63,8 +60,7 @@ void SignUp() {
     fclose(file);
 }
 
-// Fungsi untuk melakukan login
-void Login(int *Selesai2) {
+void Login(int *Selesai2, char *username) {
     char inputUsername[100];
     char inputPassword[100];
 
@@ -76,7 +72,7 @@ void Login(int *Selesai2) {
     fgets(inputPassword, 100, stdin);
     strtok(inputPassword, "\n"); // Menghapus karakter newline dari input password
 
-    FILE *file = fopen("Data_user.txt", "r"); // Membuka file untuk membaca data
+    FILE *file = fopen("Data_User.txt", "r"); // Membuka file untuk membaca data
 
     if (file == NULL) {
         printf("Error: Gagal membuka file.\n");
@@ -94,48 +90,40 @@ void Login(int *Selesai2) {
         strtok(tempUsername, "\n"); // Menghapus karakter newline dari input username
         strtok(tempPassword, "\n"); // Menghapus karakter newline dari input password
 
-        // Memeriksa apakah username cocok
-        if (strcmp(tempUsername, inputUsername) == 0) {
-            found = 1;
-            // Memeriksa apakah password cocok
-            if (strcmp(tempPassword, inputPassword) == 0) {
-                printf("Login berhasil!\n");
-                (*Selesai2)=1;
-                fclose(file);
-                return;
-            } else {
-                printf("Password salah.\n");
-                fclose(file);
-                return;
-            }
+        // Memeriksa apakah username dan password cocok
+        if (strcmp(tempUsername, inputUsername) == 0 && strcmp(tempPassword, inputPassword) == 0) {
+            printf("Login berhasil!\n");
+            (*Selesai2) = 1;
+            strcpy(username, inputUsername); // Menyimpan username yang berhasil login
+            fclose(file);
+            return;
         }
     }
 
-    if (!found) {
-        printf("Username tidak ditemukan.\n");
-    }
-
+    printf("Username atau password salah.\n");
     fclose(file);
 }
 
 int main(){
-
-    // Variabel
-    int Pilihan_Mode  ; // Admin & user dll
-    int Pilihan_Log ; // Sign up / login dll
-    int Pil2 ;  // Opsi Data
-    int Berhasil  = 0;   // Loop pada Opsi Admin & user
-    int Berhasil2 = 0;   // Login page
+    int Pilihan_Mode;
+    int Pilihan_Log;
+    int Pilihan_Opsi;
+    int Berhasil = 0;
+    int Berhasil2 = 0;
+    int Berhasil3 = 0;
+    char username[100]; // Variabel untuk menyimpan username yang berhasil login
     Clear_System();
     Header();
     
     do {
-        while(!Berhasil){
+        while (!Berhasil) {
+            Clear_System();
+            Header();
             printf("\n   Anda Login Sebagai ?\n");
-            printf("\n   1. Admin \n   2. User\n 3.Keluar\n");
+            printf("\n   1. Admin \n   2. User\n   3. Keluar\n");
             printf("\n   Pilihan Anda (1 / 2) : ");
             scanf("%d", &Pilihan_Mode);
-            while (getchar() != '\n'); 
+            while (getchar() != '\n');
 
             if (Pilihan_Mode < 1 || Pilihan_Mode > 3) {
                 printf("\n   Pilihan tidak valid. Silakan masukkan 1, 2, atau 3.\n");
@@ -143,49 +131,98 @@ int main(){
                 Berhasil = 1; 
             }
         }
-        
-        if (Pilihan_Mode == 1){
+
+        if (Pilihan_Mode == 1) {
+            Berhasil = 0;
+            Clear_System();
+            Header_Admin();
             do {
-                Clear_System();
-                Header_Admin();
                 printf("\n1. Sign-up\n2. Login\n3. Kembali\n");
                 printf("Pilihan Anda: ");
                 scanf("%d", &Pilihan_Log);
                 while (getchar() != '\n');
-                
-                if(Pilihan_Log == 1){
+            
+                if (Pilihan_Log == 1) {
                     Clear_System();
                     SignUp();
                 }
-                else if(Pilihan_Log == 2){
+                if (Pilihan_Log == 2) {
                     Clear_System();
-                    Login(&Berhasil2);
+                    Login(&Berhasil2, username); // Menyimpan username yang berhasil login
+                    if (Berhasil2 == 1) {
+                        do{
+                        printf("Selamat datang, %s!\n", username);
+                        Berhasil2 = 0; 
+                        printf("\n1. Create \n2. Delete\n3. Update\n 4. Keluar");
+                        printf("Pilihan Anda: ");
+                        scanf("%d", &Pilihan_Opsi);
+                        while (getchar() != '\n');
+
+                            switch(Pilihan_Opsi){
+                                case 1:
+                                    break;
+                                case 2:
+                                    break;
+                                case 3:
+                                    break;
+                            }
+
+
+                        } while (Pilihan_Opsi != 4);
+                        
+                        
+                       
+                    }
                 }
+        
             } while (Pilihan_Log != 3); 
-            Berhasil = 0; // Reset variabel Berhasil setelah kembali ke menu utama
         }
 
-        if (Pilihan_Mode == 2){
+        if (Pilihan_Mode == 2) {
+            Berhasil = 0;
+            Clear_System();
+            Header_Admin();
+
             do {
-                Clear_System();
-                Header_User();
                 printf("\n1. Sign-up\n2. Login\n3. Kembali\n");
                 printf("Pilihan Anda: ");
                 scanf("%d", &Pilihan_Log);
                 while (getchar() != '\n');
-                
-                if(Pilihan_Log == 1){
+            
+                if (Pilihan_Log == 1) {
                     SignUp();
                 }
-                else if(Pilihan_Log == 2){
-                    Login(&Berhasil2);
+                if (Pilihan_Log == 2) {
+                    Login(&Berhasil2, username); // Menyimpan username yang berhasil login
+                    if (Berhasil2 == 1) {
+                        printf("Selamat datang, %s!\n", username);
+                        Berhasil2= 0; // Menampilkan pesan selamat datang dengan username
+                        do{
+                        printf("Selamat datang, %s!\n", username);
+                        Berhasil2 = 0; 
+                        printf("\n1. List Buku yang tersedia \n2. Pinjam Buku\n3. List Buku yg dipinjam\n 4. Kembalikan Buku\n 5. Keluar");
+                        printf("Pilihan Anda: ");
+                        scanf("%d", &Pilihan_Opsi);
+                        while (getchar() != '\n');
+
+                            switch(Pilihan_Opsi){
+                                case 1:
+                                    break;
+                                case 2:
+                                    break;
+                                case 3:
+                                    break;
+                            }
+
+
+                        } while (Pilihan_Opsi != 5);
+                        // Lanjutan login
+                    }
                 }
             } while (Pilihan_Log != 3); 
-            Berhasil = 0; // Reset variabel Berhasil setelah kembali ke menu utama
         }
 
     } while (Pilihan_Mode != 3);  
 
     return 0;
-
 }
