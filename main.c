@@ -328,12 +328,10 @@ int main(){
                             }
 
                         } while (Pilihan_Opsi != 5);
-                        // Lanjutan login
                     }
                 }
             } while (Pilihan_Log != 3); 
         }
-
     } while (Pilihan_Mode != 3);  
 
     return 0;
