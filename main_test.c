@@ -4,16 +4,16 @@
 #include <ctype.h>
 #include "Header.h"
 
-//----------------------- Punya Affan -------------------------------------------
+
 
 struct Buku {
-    int id;
+    unsigned int id;
     char judul[100];
     char penulis[100];
     char penerbit[100];
-    int halaman;
-    int tahun;
-    int jumlah;
+    unsigned int halaman;
+    unsigned int tahun;
+    unsigned int jumlah;
 };
 
 struct Dipinjam {
@@ -21,6 +21,237 @@ struct Dipinjam {
     int jumlah;
 };
 
+
+// --------------------- Punya Haikal ----------------------
+
+// Fungsi untuk membaca data buku dari file teks
+int bacaBuku(struct Buku daftar_buku[]) {
+    FILE *file = fopen("Data_Buku.txt", "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return 0;
+    }
+
+    int jumlah_buku = 0;
+    while (fscanf(file, "%d, \"%[^\"]\", \"%[^\"]\", \"%[^\"]\", %d, %d, %d\n",
+                  &daftar_buku[jumlah_buku].id,
+                  daftar_buku[jumlah_buku].judul,
+                  daftar_buku[jumlah_buku].penulis,
+                  daftar_buku[jumlah_buku].penerbit,
+                  &daftar_buku[jumlah_buku].halaman,
+                  &daftar_buku[jumlah_buku].tahun,
+                  &daftar_buku[jumlah_buku].jumlah) != EOF) {
+        jumlah_buku++;
+    }
+
+    fclose(file);
+    return jumlah_buku;
+}
+
+// Fungsi untuk membaca data buku yang dipinjam dari file teks
+int bacaDipinjam(struct Dipinjam dipinjam[]) {
+    FILE *file = fopen("buku_dipinjam.txt", "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return 0;
+    }
+
+    int jumlah_dipinjam = 0;
+    while (fscanf(file, "\"%[^\"]\", %d\n", dipinjam[jumlah_dipinjam].judul, &dipinjam[jumlah_dipinjam].jumlah) != EOF) {
+        jumlah_dipinjam++;
+    }
+
+    fclose(file);
+    return jumlah_dipinjam;
+}
+
+// Fungsi untuk menulis data buku yang tersedia kembali ke file teks
+void tulisBuku(struct Buku daftar_buku[], int jumlah_buku) {
+    FILE *file = fopen("Data_Buku.txt", "w");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    for (int i = 0; i < jumlah_buku; i++) {
+        fprintf(file, "%d, \"%s\", \"%s\", \"%s\", %d, %d, %d\n",
+                daftar_buku[i].id,
+                daftar_buku[i].judul,
+                daftar_buku[i].penulis,
+                daftar_buku[i].penerbit,
+                daftar_buku[i].halaman,
+                daftar_buku[i].tahun,
+                daftar_buku[i].jumlah);
+    }
+
+    fclose(file);
+}
+
+// Fungsi untuk menulis data buku yang dipinjam ke file teks baru
+void tulisDipinjam(struct Dipinjam dipinjam[], int jumlah_dipinjam) {
+    FILE *file = fopen("buku_dipinjam.txt", "w");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    for (int i = 0; i < jumlah_dipinjam; i++) {
+        fprintf(file, "\"%s\", %d\n", dipinjam[i].judul, dipinjam[i].jumlah);
+    }
+
+    fclose(file);
+}
+
+// Fungsi untuk mengembalikan buku
+void kembalikanBuku(struct Buku daftar_buku[], int jumlah_buku, struct Dipinjam dipinjam[], int *jumlah_dipinjam) {
+    char judul[100];
+    int jumlah_kembali;
+    printf("Masukkan judul buku yang ingin dikembalikan: ");
+    scanf(" %[^\n]", judul);
+
+    for (int i = 0; i < *jumlah_dipinjam; i++) {
+        if (strcmp(judul, dipinjam[i].judul) == 0) {
+            for (int j = 0; j < jumlah_buku; j++) {
+                if (strcmp(judul, daftar_buku[j].judul) == 0) {
+                    printf("Masukkan jumlah buku yang ingin dikembalikan: ");
+                    scanf("%d", &jumlah_kembali);
+
+                    if (jumlah_kembali <= dipinjam[i].jumlah) {
+                        // Menambah jumlah buku yang tersedia
+                        daftar_buku[j].jumlah += jumlah_kembali;
+
+                        // Mengurangi jumlah buku yang dipinjam
+                        dipinjam[i].jumlah -= jumlah_kembali;
+
+                        // Jika tidak ada lagi buku yang dipinjam, hapus dari daftar
+                        if (dipinjam[i].jumlah == 0) {
+                            for (int k = i; k < *jumlah_dipinjam - 1; k++) {
+                                strcpy(dipinjam[k].judul, dipinjam[k + 1].judul);
+                                dipinjam[k].jumlah = dipinjam[k + 1].jumlah;
+                            }
+                            (*jumlah_dipinjam)--;
+                        }
+
+                        printf("Buku berhasil dikembalikan.\n");
+                        tulisBuku(daftar_buku, jumlah_buku);
+                        tulisDipinjam(dipinjam, *jumlah_dipinjam);
+                        return;
+                    } else {
+                        printf("Jumlah buku yang ingin dikembalikan melebihi jumlah yang dipinjam.\n");
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    printf("Buku tidak ditemukan dalam daftar yang dipinjam.\n");
+}
+
+
+//----------------------Batas Punya Haikal ---------------------
+
+// --------------------- Punya Fariz --------------------------
+
+void hapusBuku(struct Buku Data_Buku[], int *jumlah_buku, int id) {
+    for (int i = 0; i < *jumlah_buku; i++) {
+        if (Data_Buku[i].id == id) {
+            for (int j = i; j < *jumlah_buku - 1; j++) {
+                Data_Buku[j] = Data_Buku[j + 1];
+            }
+            (*jumlah_buku)--;
+            printf("Buku berhasil dihapus.\n");
+            return;
+        }
+    }
+    printf("Buku dengan ID tersebut tidak ditemukan.\n");
+}
+
+void Tulis_Buku_Fariz(struct Buku Data_Buku[], int jumlah_buku) {
+    FILE *file = fopen("Data_Buku.txt", "w");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    for (int i = 0; i < jumlah_buku; i++) {
+        fprintf(file, "%d, \"%s\", \"%s\", \"%s\", %d, %d, %d\n",
+                Data_Buku[i].id,
+                Data_Buku[i].judul,
+                Data_Buku[i].penulis,
+                Data_Buku[i].penerbit,
+                Data_Buku[i].halaman,
+                Data_Buku[i].tahun,
+                Data_Buku[i].jumlah);
+    }
+
+    fclose(file);
+}
+
+
+// ----------------------- Batas Punya Fariz --------------------------
+
+// ---------------------- Punya Aska --------------------------------------
+
+// Fungsi untuk menambahkan buku baru dalam sistem
+void Create_Buku() {
+    Perpus buku;
+    // Menampilkan perintah untuk memasukkan informasi buku 
+    printf("--Masukkan informasi buku baru--\n");
+    // Meminta admin untuk memasukkan id buku
+    printf("ID: ");
+    scanf("%u", &buku.Id_buku);
+    // Meminta admin untuk memasukkan judul buku
+    printf("Judul: "); 
+    // Membersihkan newline character dari buffer
+    getchar();
+    fgets(buku.Judul, 100, stdin);
+    // Menghapus newline character dari judul
+    buku.Judul[strcspn(buku.Judul, "\n")] = '\0'; 
+    // Meminta admin untuk memasukkan nama penulis buku
+    printf("Penulis: ");
+    fgets(buku.Penulis, 100, stdin);
+    // Menghapus newline character dari penulis
+    buku.Penulis[strcspn(buku.Penulis, "\n")] = '\0'; 
+    // Meminta admin untuk memasukkan nama penerbit buku
+    printf("Penerbit: ");
+    fgets(buku.Penerbit, 100, stdin);
+    // Menghapus newline character dari penerbit
+    buku.Penerbit[strcspn(buku.Penerbit, "\n")] = '\0'; 
+    // Meminta admin untuk memasukkan jumlah halaman buku
+    printf("Jumlah Halaman: ");
+    scanf("%u", &buku.Jumlah_halaman);
+    // Meminta admin untuk memasukkan tahun terbit buku
+    printf("Tahun Terbit: ");
+    scanf("%u", &buku.Tahun_terbit);
+    // Meminta admin untuk memasukkan slot buku yang ada
+    printf("Jumlah Tersedia: ");
+    scanf("%u", &buku.Jumlah_tersedia);
+
+    // Buka file untuk menambahkan data buku baru
+    FILE *file = fopen("Data_Buku.txt", "a");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+    }
+
+    // Menulis data buku baru ke dalam file
+    fprintf(file, "\n%u, \"%s\", \"%s\", \"%s\", %u, %u, %u", buku.Id_buku, buku.Judul, buku.Penulis,
+            buku.Penerbit, buku.Jumlah_halaman, buku.Tahun_terbit, buku.Jumlah_tersedia);
+
+    // Menutup file
+    fclose(file); 
+    printf("Buku berhasil ditambahkan ke dalam sistem.\n");
+}
+
+//------------------------Batas Punya Aska ----------------------
+
+//----------------------- Punya Affan -------------------------------------------
+
+
+//struct Dipinjam {
+    //char judul[100];
+    //int jumlah;
+//};
 
 // Fungsi untuk membaca data buku dari file teks
 int Baca_Buku(struct Buku daftar_buku[]) {
@@ -69,8 +300,8 @@ void Tulis_Buku(struct Buku daftar_buku[], int jumlah_buku) {
 }
 
 // Fungsi untuk menulis data buku yang dipinjam ke file teks baru
-void Dipinjam(struct Dipinjam dipinjam[], int jumlah_dipinjam ) {
-    FILE *file = fopen("buku_dipinjam.txt", "w");
+void Dipinjam(struct Dipinjam dipinjam[], int jumlah_dipinjam , char username[] ) {
+    FILE *file = fopen(username, "w");
     if (file == NULL) {
         printf("Gagal membuka file.\n");
         return;
@@ -347,6 +578,8 @@ int main(){
     char username[100]; // Variabel untuk menyimpan username yang berhasil login
     struct Buku Data_Buku[100];
     struct Dipinjam dipinjam[100];
+    int jumlah_buku = Baca_Buku(Data_Buku); 
+    int jumlah_dipinjam = 0;
     
     Clear_System();
     Header();
@@ -389,6 +622,9 @@ int main(){
                     LoginAdmin(&Berhasil2, username); // Menyimpan username yang berhasil login
                     if (Berhasil2 == 1) {
                         do{
+                        system("pause");
+                        Clear_System();
+                        List_Buku();
                         printf("\n  Selamat datang, %s!\n", username);
                         Berhasil2 = 0; 
                         printf("\n\t ( Pilihan )\n");
@@ -400,12 +636,18 @@ int main(){
                             switch(Pilihan_Opsi){
                                 case 1:
                                 Clear_System();
-                                printf("\n  Create \n");
+                                List_Buku();
+                                Create_Buku();
                                 system("pause");
                                 break;
                                 case 2:
                                 Clear_System();
-                                printf("\n  Delete \n");
+                                List_Buku();
+                                printf("Masukkan ID buku yang ingin dihapus: ");
+                                int id;
+                                scanf("%d", &id);
+                                hapusBuku(Data_Buku, &jumlah_buku, id);
+                                Tulis_Buku_Fariz(Data_Buku, jumlah_buku);
                                 system("pause");
                                 break;
                                 case 3:
@@ -467,15 +709,13 @@ int main(){
                                 Clear_System();
                                 List_Buku();
                                 printf("\n  Pinjam Buku \n ");
-                                int jumlah_buku = Baca_Buku(Data_Buku); 
-                                int jumlah_dipinjam = 0;
                                 if (jumlah_buku == 0) {
                                     printf("Tidak ada data buku.\n");
                                     return 1;
                                 }
                                 Pinjam_Buku(Data_Buku, jumlah_buku, dipinjam, &jumlah_dipinjam);
                                 Tulis_Buku(Data_Buku, jumlah_buku);
-                                Dipinjam(dipinjam, jumlah_dipinjam);
+                                Dipinjam(dipinjam, jumlah_dipinjam , username);
                                 system("pause");
                                     break;
                                 case 3:
