@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#define Max_char 50
+#define Max_char 100
 
 typedef struct
 {
@@ -38,14 +38,14 @@ void Login();
 int Baca_Buku(Perpus[]);
 void List_Buku();
 void Display_List_Buku(int, int, int, Perpus[]);
-void Dipinjam(Borrow[], int , char[]);
-void Pinjam_Buku(Perpus[], int, Borrow[], int *);
+void Create_Buku();
+void Update_Buku();
 void hapusBuku(Perpus[], int *, int);
 void Tulis_Buku(Perpus[], int);
-void Create_Buku();
+void Pinjam_Buku(Perpus[], int, Borrow[], int *);
+void Dipinjam(Borrow[], int , char[]);
+void Tulis_Dipinjam_H(Borrow[], int, char[]);
 int Baca_Buku_H(Perpus[]);
 int Baca_Dipinjam_H(Borrow[], char[]);
-void Tulis_Dipinjam_H(Borrow[], int, char[]);
 void Kembalikan_Buku(Perpus[], int, Borrow[], int *, char[]);
 void Read_Peminjaman(const char *);
-void Update_Buku();
