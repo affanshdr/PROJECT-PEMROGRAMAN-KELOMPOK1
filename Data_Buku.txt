@@ -1,5 +1,5 @@
 1, "Pengantar Sistem Informasi", "Ahmad Ridwan", "Pustaka Mandri", 250, 2020, 50
 2, "Algoritma dan Pemrograman Java", "Budi Santoso", "Informatika Press", 350, 2019, 30
-3, "Sistem Basis Data", "Benny Irwanto", "Andi Offset", 450, 2016, 14
+3, "Sistem Basis Data", "Benny Irwanto", "Andi Offset", 450, 2016, 15
 4, "Belajar Pemrograman C dari Dasar", "Budi Raharjo", "Andi Offset", 280, 2015, 15
 5, "Pemrograman Java Dasar", "Budi Raharjo", "Informatika", 350, 2015, 30
