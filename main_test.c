@@ -25,7 +25,7 @@ struct Dipinjam {
 // --------------------- Punya Haikal ----------------------
 
 // Fungsi untuk membaca data buku dari file teks
-int bacaBuku(struct Buku daftar_buku[]) {
+int Baca_Buku_H(struct Buku daftar_buku[]) {
     FILE *file = fopen("Data_Buku.txt", "r");
     if (file == NULL) {
         printf("Gagal membuka file.\n");
@@ -49,8 +49,8 @@ int bacaBuku(struct Buku daftar_buku[]) {
 }
 
 // Fungsi untuk membaca data buku yang dipinjam dari file teks
-int bacaDipinjam(struct Dipinjam dipinjam[]) {
-    FILE *file = fopen("buku_dipinjam.txt", "r");
+int Baca_Dipinjam_H(struct Dipinjam dipinjam[], char username[]) {
+    FILE *file = fopen(username, "r");
     if (file == NULL) {
         printf("Gagal membuka file.\n");
         return 0;
@@ -66,7 +66,7 @@ int bacaDipinjam(struct Dipinjam dipinjam[]) {
 }
 
 // Fungsi untuk menulis data buku yang tersedia kembali ke file teks
-void tulisBuku(struct Buku daftar_buku[], int jumlah_buku) {
+void Tulis_Buku_H(struct Buku daftar_buku[], int jumlah_buku) {
     FILE *file = fopen("Data_Buku.txt", "w");
     if (file == NULL) {
         printf("Gagal membuka file.\n");
@@ -88,8 +88,8 @@ void tulisBuku(struct Buku daftar_buku[], int jumlah_buku) {
 }
 
 // Fungsi untuk menulis data buku yang dipinjam ke file teks baru
-void tulisDipinjam(struct Dipinjam dipinjam[], int jumlah_dipinjam) {
-    FILE *file = fopen("buku_dipinjam.txt", "w");
+void Tulis_Dipinjam_H(struct Dipinjam dipinjam[], int jumlah_dipinjam, char username[]) {
+    FILE *file = fopen(username, "w");
     if (file == NULL) {
         printf("Gagal membuka file.\n");
         return;
@@ -103,7 +103,7 @@ void tulisDipinjam(struct Dipinjam dipinjam[], int jumlah_dipinjam) {
 }
 
 // Fungsi untuk mengembalikan buku
-void kembalikanBuku(struct Buku daftar_buku[], int jumlah_buku, struct Dipinjam dipinjam[], int *jumlah_dipinjam) {
+void Kembalikan_Buku(struct Buku daftar_buku[], int jumlah_buku, struct Dipinjam dipinjam[], int *jumlah_dipinjam , char username[]) {
     char judul[100];
     int jumlah_kembali;
     printf("Masukkan judul buku yang ingin dikembalikan: ");
@@ -133,8 +133,8 @@ void kembalikanBuku(struct Buku daftar_buku[], int jumlah_buku, struct Dipinjam 
                         }
 
                         printf("Buku berhasil dikembalikan.\n");
-                        tulisBuku(daftar_buku, jumlah_buku);
-                        tulisDipinjam(dipinjam, *jumlah_dipinjam);
+                        Tulis_Buku_H(daftar_buku, jumlah_buku);
+                        Tulis_Dipinjam_H(dipinjam, *jumlah_dipinjam , username);
                         return;
                     } else {
                         printf("Jumlah buku yang ingin dikembalikan melebihi jumlah yang dipinjam.\n");
@@ -243,7 +243,34 @@ void Create_Buku() {
     printf("Buku berhasil ditambahkan ke dalam sistem.\n");
 }
 
-//------------------------Batas Punya Aska ----------------------
+//------------------------Batas Punya Aska 1 ----------------------
+
+void Read_Peminjaman(const char *namaFile) {
+    // Buka file teks
+    FILE *file = fopen(namaFile, "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return;
+    }
+
+    printf("+------------------------------------------+\n");
+    printf("|          Judul Buku        |   Jumlah   |\n");
+    printf("+------------------------------------------+\n");
+
+    // Variabel untuk menyimpan judul buku dan jumlah buku yang dipinjam
+    struct Dipinjam dipinjam;
+
+    // Baca setiap baris dari file
+    while (fscanf(file, "\"%[^\"]\", %d\n", dipinjam.judul, &dipinjam.jumlah) != EOF) {
+        printf("| %-27s | %-10d |\n", dipinjam.judul, dipinjam.jumlah);
+    }
+
+    printf("+------------------------------------------+\n");
+
+    // Tutup file
+    fclose(file);
+}
+
 
 //----------------------- Punya Affan -------------------------------------------
 
@@ -398,6 +425,18 @@ void Clear_System() {
     #else
         system("clear");
     #endif
+}
+
+void Header2(){
+    printf("\t +----------------------+\n");
+    printf("\t |  Buku Yang Tersedia  |\n");
+    printf("\t +----------------------+\n\n");
+}
+
+void Header3(){
+    printf("\t +----------------------+\n");
+    printf("\t |  Buku Yang Dipinjam  |\n");
+    printf("\t +----------------------+\n\n");
 }
 
 void Header_Admin(){
@@ -622,8 +661,9 @@ int main(){
                     LoginAdmin(&Berhasil2, username); // Menyimpan username yang berhasil login
                     if (Berhasil2 == 1) {
                         do{
-                        system("pause");
+                        //system("pause");
                         Clear_System();
+                        Header2();
                         List_Buku();
                         printf("\n  Selamat datang, %s!\n", username);
                         Berhasil2 = 0; 
@@ -636,12 +676,14 @@ int main(){
                             switch(Pilihan_Opsi){
                                 case 1:
                                 Clear_System();
+                                Header2();
                                 List_Buku();
                                 Create_Buku();
                                 system("pause");
                                 break;
                                 case 2:
                                 Clear_System();
+                                Header2();
                                 List_Buku();
                                 printf("Masukkan ID buku yang ingin dihapus: ");
                                 int id;
@@ -702,11 +744,13 @@ int main(){
                             switch(Pilihan_Opsi){
                                 case 1:
                                 Clear_System();
+                                Header2();
                                 List_Buku();
                                 system("pause");
                                     break;
                                 case 2:
                                 Clear_System();
+                                Header2();
                                 List_Buku();
                                 printf("\n  Pinjam Buku \n ");
                                 if (jumlah_buku == 0) {
@@ -720,13 +764,18 @@ int main(){
                                     break;
                                 case 3:
                                 Clear_System();
-                                printf("\n  Kembali Buku \n ");
+                                Header3();
+                                Read_Peminjaman(username);
                                 system("pause");
                                 break;
 
                                 case 4:
                                 Clear_System();
-                                printf("\n  Buku yang Dipinjam \n ");
+                                Header3();
+                                Read_Peminjaman(username);
+                                int jumlah_buku = Baca_Buku_H(Data_Buku);
+                                int jumlah_dipinjam = Baca_Dipinjam_H(dipinjam, username);
+                                Kembalikan_Buku(Data_Buku, jumlah_buku, dipinjam, &jumlah_dipinjam , username);
                                 system("pause");
                             }
 
