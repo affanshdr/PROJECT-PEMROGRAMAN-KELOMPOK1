@@ -3,3 +3,18 @@
 3, "Sistem Basis Data", "Benny Irwanto", "Andi Offset", 450, 2016, 15
 4, "Belajar Pemrograman C dari Dasar", "Budi Raharjo", "Andi Offset", 280, 2015, 15
 5, "Pemrograman Java Dasar", "Budi Raharjo", "Informatika", 350, 2015, 30
+6, "Java Programming", "John Doe", "TechPub", 300, 2018, 30
+7, "Python Basics", "Jane Smith", "CodeBooks", 250, 2017, 25
+8, "Data Structures", "Alice Johnson", "TechPub", 400, 2016, 20
+9, "Computer Networks", "Bob Lee", "NetworkPress", 350, 2019, 18
+10, "JavaScript Essentials", "Chris Brown", "CodeBooks", 280, 2020, 22
+11, "SQL Fundamentals", "Emily Davis", "DataPress", 320, 2015, 17
+12, "Web Development", "George Wilson", "TechPub", 380, 2014, 19
+13, "Algorithms 101", "Hannah Green", "CodeBooks", 270, 2018, 21
+14, "Machine Learning Basics", "Jack Smith", "MLPress", 420, 2017, 16
+15, "Cybersecurity Essentials", "Kelly White", "TechPub", 340, 2016, 15
+16, "HTML & CSS", "Liam Johnson", "CodeBooks", 200, 2019, 23
+17, "Java for Beginners", "Mary Brown", "TechPub", 280, 2018, 28
+18, "Network Security", "Nathan Green", "NetworkPress", 380, 2015, 26
+19, "Python Programming", "Olivia Black", "CodeBooks", 320, 2017, 29
+20, "Software Engineering", "Paula White", "TechPub", 360, 2016, 27
