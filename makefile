@@ -1,3 +1,3 @@
 test :
-	gcc Header.h main.c delete.c Dipinjam.c  Fungsi_tambahan.c list_buku.c tambah_buku.c Update_Buku.c pengembalian.c list_peminjaman.c -o a
+	gcc Header.h main.c Delete.c Dipinjam.c  Fungsi_tambahan.c List_Buku.c Tambah_Buku.c Update_Buku.c Pengembalian.c List_Peminjaman.c -o a
 	./a
