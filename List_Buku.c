@@ -48,7 +48,7 @@ void List_Buku(){
     fclose(fp);
 
     int data_per_page = 10;
-    int total_page = (data + data_per_page) / data_per_page;
+    int total_page = (data + data_per_page - 1) / data_per_page;
 
     Display_List_Buku(page, data_per_page, data, buku);
 
