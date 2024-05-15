@@ -47,11 +47,13 @@ int main(){
                     Clear_System();
                     Sign_Up();
                     SignUpAdmin();
+                    Pause();
                 }
                 if (Pilihan_Log == 2) {
                     Clear_System();
                     Log_In();
                     LoginAdmin(&Berhasil2, username); // Menyimpan username yang berhasil login
+                    Pause();
                     if (Berhasil2 == 1) {
                         do{
                         //system("pause");
@@ -118,11 +120,13 @@ int main(){
                     Clear_System();
                     Sign_Up();
                     SignUp();
+                    Pause();
                 }
                 if (Pilihan_Log == 2) {
                     Clear_System();
                     Log_In();
                     Login(&Berhasil2, username); // Menyimpan username yang berhasil login
+                    Pause();
                     if (Berhasil2 == 1) {
                         Berhasil2= 0; // Menampilkan pesan selamat datang dengan username
                         do{
