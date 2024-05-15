@@ -31,6 +31,7 @@ void Header_Admin();
 void Sign_Up();
 void Log_In();
 void Header_User();
+void Pause();
 void SignUpAdmin();
 void LoginAdmin(int *, char *);
 void SignUp();
