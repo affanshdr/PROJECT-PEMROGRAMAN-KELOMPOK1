@@ -4,6 +4,12 @@
 #include <ctype.h>
 #define Max_char 100
 
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <unistd.h>
+#endif
+
 typedef struct
 {
     unsigned int Id_buku;
