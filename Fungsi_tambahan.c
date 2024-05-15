@@ -66,7 +66,7 @@ void SignUpAdmin() {
     FILE *file = fopen("Data_Admin.txt", "w"); // Menambahkan data ke file
 
     if (file == NULL) {
-        printf("Error: Gagal membuka file.\n");
+        printf("  Username dan Password tidak ditemukan ...\n");
         return;
     }
 
@@ -81,7 +81,7 @@ void SignUpAdmin() {
     strtok(newUser.password, "\n"); // Menghapus karakter newline dari input password
 
     fprintf(file, "%s\n%s\n", newUser.username, newUser.password);
-    printf("  Sign-up berhasil!\n");
+    printf("  Sign-up berhasil, Please Wait ...\n");
 
     fclose(file);
 }
@@ -101,7 +101,7 @@ void LoginAdmin(int *Selesai2, char *username) {
     FILE *file = fopen("Data_Admin.txt", "r"); // Membuka file untuk membaca data
 
     if (file == NULL) {
-        printf("Error: Gagal membuka file.\n");
+        printf("  Username dan Password tidak ditemukan ...\n");
         return;
     }
 
@@ -118,7 +118,7 @@ void LoginAdmin(int *Selesai2, char *username) {
 
         // Memeriksa apakah username dan password cocok
         if (strcmp(tempUsername, inputUsername) == 0 && strcmp(tempPassword, inputPassword) == 0) {
-            printf("  Login berhasil!\n");
+            printf("  Login berhasil, Please Wait ...\n");
             (*Selesai2) = 1;
             strcpy(username, inputUsername); // Menyimpan username yang berhasil login
             fclose(file);
@@ -126,7 +126,7 @@ void LoginAdmin(int *Selesai2, char *username) {
         }
     }
 
-    printf("  Username atau password salah.\n");
+    printf("  Username atau password salah ...\n");
     fclose(file);
 }
 
@@ -150,7 +150,7 @@ void SignUp() {
     strtok(newUser.password, "\n"); // Menghapus karakter newline dari input password
 
     fprintf(file, "%s\n%s\n", newUser.username, newUser.password);
-    printf("  Sign-up berhasil!\n");
+    printf("  Sign-up berhasil, Please Wait ...\n");
 
     fclose(file);
 }
@@ -170,7 +170,7 @@ void Login(int *Selesai2, char *username) {
     FILE *file = fopen("Data_User.txt", "r"); // Membuka file untuk membaca data
 
     if (file == NULL) {
-        printf("Error: Gagal membuka file.\n");
+        printf("  Username dan Password tidak ditemukan ...\n");
         return;
     }
 
@@ -195,6 +195,6 @@ void Login(int *Selesai2, char *username) {
         }
     }
 
-    printf("  Username atau password salah.\n");
+    printf("  Username atau password salah ...\n");
     fclose(file);
 }
