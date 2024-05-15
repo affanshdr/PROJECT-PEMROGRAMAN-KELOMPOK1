@@ -52,6 +52,15 @@ void Header_User(){
     printf("+----------------------------------------+\n");
 }
 
+void Pause() {
+    #ifdef _WIN32
+    Sleep(2000); // Windows
+    #else
+    sleep(2); // Unix
+    #endif
+}
+
+
 void SignUpAdmin() {
     
     FILE *file = fopen("Data_Admin.txt", "w"); // Menambahkan data ke file
